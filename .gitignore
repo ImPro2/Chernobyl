@@ -9,3 +9,5 @@ bin-int/
 *.sln
 *.log
 .vs/
+*/bin/
+*/bin-int/
