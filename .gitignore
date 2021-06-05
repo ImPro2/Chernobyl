@@ -1,0 +1,11 @@
+bin/
+bin-int/
+
+# Project files
+
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.log
+.vs/
