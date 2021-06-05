@@ -11,3 +11,8 @@ bin-int/
 .vs/
 */bin/
 */bin-int/
+
+# Unnecessary files
+
+*.html
+*.js
