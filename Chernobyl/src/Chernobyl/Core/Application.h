@@ -2,10 +2,10 @@
 
 #include "Chernobyl/Window/WindowInterface.h"
 #include "Chernobyl/GUI/ImGuiModule.h"
+#include "Core.h"
+#include "ExitCode.h"
 
 #include "glm/glm.hpp"
-
-#include "Core.h"
 
 namespace CH
 {
@@ -17,7 +17,7 @@ namespace CH
 
 	struct StartupArguments
 	{
-		std::vector<std::string> Args;
+		std::vector<char*> Args;
 		int32 Count;
 	};
 
@@ -37,6 +37,7 @@ namespace CH
 
 	public:
 		void SetStartupArguments(int argc, char** argv);
+		void Exit(ExitCode code);
 
 	private:
 		// Events

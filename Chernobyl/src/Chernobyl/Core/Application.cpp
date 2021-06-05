@@ -28,8 +28,10 @@ namespace CH
 
 		for (int i = 0; i < argc; i++)
 		{
-			m_StartupArguments.Args[i] = std::string(argv[i]);
+			m_StartupArguments.Args[i] = argv[i];
 		}
+
+		// do some extra formatting here
 	}
 
 	void Application::OnEvent(Event& e)
@@ -59,7 +61,10 @@ namespace CH
 				RenderCommand::Clear();
 
 				for (std::vector<Module*>::iterator it = ModuleStack::begin(); it != ModuleStack::end(); it++)
+				{
 					(*it)->OnUpdate();
+					if (!m_Running) break;
+				}
 
 				m_ImGuiModule->BeginFrame();
 				for (std::vector<Module*>::iterator it = ModuleStack::begin(); it != ModuleStack::end(); it++)
@@ -73,6 +78,11 @@ namespace CH
 		}
 
 		return m_ExitCode;
+	}
+
+	void Application::Exit(ExitCode code)
+	{
+		m_Window->GetEventCallback()(AppCloseEvent((int32)code));
 	}
 
 	bool Application::OnAppCreate(AppCreateEvent& e)

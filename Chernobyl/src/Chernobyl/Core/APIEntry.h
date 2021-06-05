@@ -11,7 +11,7 @@ extern CH::Application* CreateApplication();
 int main(int argc, char** argv)
 {
 	CH::Application* app = CreateApplication();
-	//app->SetStartupArguments(argc, argv);
+	app->SetStartupArguments(argc, argv);
 	
 	int code = app->Run();
 	delete app;

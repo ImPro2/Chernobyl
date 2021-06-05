@@ -14,6 +14,8 @@ public:
 
 	void OnUpdate() override
 	{
+		if (CH::Input::IsKeyPressed('S'))
+			CH::Application::Get()->Exit(CH::ExitCode::Success);
 	}
 
 	void OnImGuiRender() override

@@ -28,12 +28,13 @@ namespace CH
 
 		static std::unique_ptr<Window> Create(WindowData data = WindowData());
 
-		virtual int32         GetWidth()   const = 0;
-		virtual int32         GetHeight()  const = 0;
-		virtual const char* GetTitle()   const = 0;
-		virtual bool        IsVSync()    const = 0;
-		virtual void* GetHandle()  const = 0;
-		virtual bool		  IsOpen()	   const = 0;
+		virtual int32                 GetWidth()         const = 0;
+		virtual int32                 GetHeight()        const = 0;
+		virtual const char*           GetTitle()         const = 0;
+		virtual bool                  IsVSync()          const = 0;
+		virtual void*                 GetHandle()        const = 0;
+		virtual bool		          IsOpen()	         const = 0;
+		virtual WindowEventCallbackFn GetEventCallback() const = 0;
 
 		virtual void SetEventCallback(WindowEventCallbackFn fn) = 0;
 
