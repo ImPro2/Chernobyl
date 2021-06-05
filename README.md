@@ -1,4 +1,7 @@
 # Chernobyl Engine
+
+![Chernobyl](/Resources/Branding/Logo.png?raw=true "Chernobyl")
+
 A game engine written in C++
 
 ## Cloning
