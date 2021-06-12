@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "ImGuiModule.h"
 
 #include "imgui.h"
@@ -44,6 +45,9 @@ namespace CH
 
 #ifdef CH_PLATFORM_WINDOWS
 		ImGui_ImplDX11_Init(DXInternal::GetDevice(), DXInternal::GetDeviceContext());
+#endif
+
+#if CH_RENDERER_API CH_DIRECT3D
 		ImGui_ImplWin32_Init(Application::Get()->GetWindow()->GetHandle());
 #endif
 	}
@@ -63,8 +67,13 @@ namespace CH
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize = ImVec2(Application::Get()->GetWindow()->GetWidth(), Application::Get()->GetWindow()->GetHeight());
 
+#if CH_RENDERER_API CH_DIRECT3D
 		ImGui_ImplDX11_NewFrame();
+#endif
+		
+#ifdef CH_PLATFORM_WINDOWS
 		ImGui_ImplWin32_NewFrame();
+#endif
 
 		ImGui::NewFrame();
 	}
@@ -74,13 +83,18 @@ namespace CH
 		ImGuiIO& io = ImGui::GetIO();
 
 		ImGui::Render();
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
+#if CH_RENDERER_API CH_DIRECT3D
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+#endif
+
+#ifdef CH_PLATFORM_WINDOWS
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
 		}
+#endif
 	}
 
 }

@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "Application.h"
 
 #include "Chernobyl/Renderer/RenderCommand.h"
@@ -11,7 +12,7 @@ namespace CH
 
 	Application::Application()
 	{
-		ASSERT(s_Instance == nullptr, "Already initialized Application!");
+		CH_ASSERT(s_Instance == nullptr, "Already initialized Application!");
 		s_Instance = this;
 
 		Log::Init();
@@ -28,7 +29,7 @@ namespace CH
 
 		for (int i = 0; i < argc; i++)
 		{
-			m_StartupArguments.Args[i] = argv[i];
+			m_StartupArguments.Args.push_back(argv[i]);
 		}
 
 		// do some extra formatting here
@@ -57,9 +58,6 @@ namespace CH
 			
 			if (!m_Minimized)
 			{
-				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f });
-				RenderCommand::Clear();
-
 				for (std::vector<Module*>::iterator it = ModuleStack::begin(); it != ModuleStack::end(); it++)
 				{
 					(*it)->OnUpdate();

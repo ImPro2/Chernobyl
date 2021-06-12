@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "WindowsWindow.h"
 
 #include "Chernobyl/Core/Application.h"
@@ -30,14 +31,14 @@ namespace CH
 		wc.lpszClassName = TEXT("Main_Window_Class");
 		wc.hIconSm = nullptr;
 
-		ASSERT(SUCCEEDED(::RegisterClassEx(&wc)), "Failed to register window class {0}", "Main_Window_Class");
+		CH_ASSERT(SUCCEEDED(::RegisterClassEx(&wc)), "Failed to register window class {0}", "Main_Window_Class");
 
 		Init();
 	}
 
 	void WindowsWindow::Init()
 	{
-		CORE_INFO("Creating window {0}: Size: ({1}, {2}), VSyncEnabled: ({3})", m_Data.Title, m_Data.Width, m_Data.Height, m_Data.VSyncEnabled);
+		CH_CORE_INFO("Creating window {0}: Size: ({1}, {2}), VSyncEnabled: ({3})", m_Data.Title, m_Data.Width, m_Data.Height, m_Data.VSyncEnabled);
 
 		m_Handle = ::CreateWindowExA(
 			WS_EX_OVERLAPPEDWINDOW,
@@ -49,7 +50,7 @@ namespace CH
 			&m_Data
 		);
 
-		ASSERT(m_Handle, "Failed to initialize window {0}", m_Data.Title);
+		CH_ASSERT(m_Handle, "Failed to initialize window {0}", m_Data.Title);
 
 		::SetWindowLongPtr(m_Handle, GWLP_USERDATA, (LONG_PTR)(&m_Data));
 
@@ -91,7 +92,7 @@ namespace CH
 			AppCloseEvent e(0);
 			data->EventCallback(e);
 			data->IsOpen = false;
-			CORE_INFO("Closing window {0}", data->Title);
+			CH_CORE_INFO("Closing window {0}", data->Title);
 			break;
 		}
 		case WM_SIZE:

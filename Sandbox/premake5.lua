@@ -9,6 +9,9 @@ project "Sandbox"
 
     disablewarnings { warnings }
 
+    pchheader "sandboxpch.h"
+    pchsource "src/sandboxpch.cpp"
+
     files
     {
         "src/**.h",

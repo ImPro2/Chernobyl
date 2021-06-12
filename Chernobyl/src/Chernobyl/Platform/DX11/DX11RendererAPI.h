@@ -8,11 +8,11 @@ namespace CH
 	class DX11RendererAPI : public RendererAPI
 	{
 	public:
-		void SetClearColor(const glm::vec3& color) override;
+		void SetClearColor(const float3& color) override;
 		void Clear() override;
 
 	private:
-		glm::vec3 m_ClearColor;
+		float3 m_ClearColor;
 	};
 
 }

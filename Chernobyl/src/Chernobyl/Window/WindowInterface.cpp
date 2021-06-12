@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "WindowInterface.h"
 
 #ifdef CH_PLATFORM_WINDOWS

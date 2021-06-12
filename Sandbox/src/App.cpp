@@ -1,5 +1,6 @@
-#define CH_API_ENTRY
+#define CH_API_ENTRY 1
 #include "Chernobyl.h"
+#include "sandboxpch.h"
 
 #include "imgui.h"
 
@@ -16,14 +17,37 @@ public:
 	{
 		if (CH::Input::IsKeyPressed('S'))
 			CH::Application::Get()->Exit(CH::ExitCode::Success);
+
+		CH::RenderCommand::SetClearColor(m_ClearColor);
+		CH::RenderCommand::Clear();
 	}
 
 	void OnImGuiRender() override
 	{
 		ImGui::Begin("Stats");
-		ImGui::Text("Timestep: %fms, FPS: %fs", CH::Time::GetDeltaTime().AsMilliSeconds(), CH::Time::GetFrameTime());
+
+		float fps = CH::Time::GetTimestep();
+
+		ImGui::Columns(2);
+		ImGui::NextColumn();
+		ImGui::SetColumnWidth(0, 130.0f);
+		ImGui::PlotLines("##FPS", &fps, 1);
+		ImGui::Columns(1);
+		
+		ImGui::Text("Timestep (s):      %fs ",     CH::Time::GetTimestep());
+		ImGui::Text("Timestep (ms):     %fms",     CH::Time::GetDeltaTime().AsMilliSeconds());
+		ImGui::Text("Timestep (micros): %fmicros", CH::Time::GetDeltaTime().AsMicroSeconds());
+		ImGui::Text("Timestep (ns):     %fns",     CH::Time::GetDeltaTime().AsNanoSeconds());
+		ImGui::Text("Frames Per Second (FPS): %f", CH::Time::GetFrameTime());
+		ImGui::End();
+
+		ImGui::Begin("Debug");
+		ImGui::ColorEdit3("Clear Color", &m_ClearColor.x, ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_Float);
 		ImGui::End();
 	}
+
+private:
+	CH::float3 m_ClearColor;
 };
 
 class SandboxApp : public CH::Application

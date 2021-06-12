@@ -1,0 +1,13 @@
+#pragma once
+
+#define CH_DIRECT3D 1
+#define CH_OPENGL   2
+#define CH_VULKAN   3
+
+#ifdef CH_PLATFORM_WINDOWS
+	#define CH_RENDERER_API CH_DIRECT3D
+#elif CH_PLATFORM_LINUX
+	#define CH_RENDERER_API CH_OPENGL
+#elif CH_PLATFORM_MACOS
+	#define CH_RENDERER_API CH_OPENGL
+#endif

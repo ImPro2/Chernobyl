@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "DX11Internal.h"
 
 namespace CH
@@ -73,13 +74,13 @@ namespace CH
 				nullptr,
 				&pContext
 			)))
-				ASSERT(false, "Failed to initialize d3d11");
+				CH_ASSERT(false, "Failed to initialize d3d11");
 
 			ComPtr<ID3D11Resource> pBackBuffer = nullptr;
 			hr = pSwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer);
-			ASSERT(SUCCEEDED(hr), "Failed to get back buffer");
+			CH_ASSERT(SUCCEEDED(hr), "Failed to get back buffer");
 			hr = pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pRTV);
-			ASSERT(SUCCEEDED(hr), "Failed to create rtv");
+			CH_ASSERT(SUCCEEDED(hr), "Failed to create rtv");
 		}
 
 	}

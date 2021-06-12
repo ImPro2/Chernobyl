@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "RenderCommand.h"
 
 #ifdef CH_PLATFORM_WINDOWS
@@ -7,7 +8,7 @@
 namespace CH
 {
 
-#ifdef CH_PLATFORM_WINDOWS
+#if CH_RENDERER_API CH_DIRECT3D
 	RendererAPI* RenderCommand::s_API = new DX11RendererAPI();
 #endif
 

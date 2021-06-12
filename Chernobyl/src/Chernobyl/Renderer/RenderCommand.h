@@ -8,7 +8,7 @@ namespace CH
 	class RenderCommand
 	{
 	public:
-		inline static void SetClearColor(const glm::vec3& color)
+		inline static void SetClearColor(const float3& color)
 		{
 			s_API->SetClearColor(color);
 		}

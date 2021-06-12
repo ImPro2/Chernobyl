@@ -14,33 +14,33 @@
 
 #if CH_ENABLE_ASSERTS 1
 	
-	#define ASSERT_CON(condition)\
+	#define CH_ASSERT_CON(condition)\
 	if (!(condition))\
 	{\
-		ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
+		CH_ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
 		__debugbreak();\
 	}
 
-	#define ASSERT(condition, ...)\
+	#define CH_ASSERT(condition, ...)\
 	if (!(condition))\
 	{\
-		ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
-		ERROR(__VA_ARGS__);\
+		CH_ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
+		CH_ERROR(__VA_ARGS__);\
 		__debugbreak();\
 	}
 
-	#define CORE_ASSERT(condition, ...)\
+	#define CH_CORE_ASSERT(condition, ...)\
 	if (!(condition))\
 	{\
-		CORE_ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
-		CORE_ERROR(__VA_ARGS__);\
+		CH_CORE_ERROR("Assertion failed: [FILE]: ({0}), [LINE]: ({1})", __FILE__, __LINE__);\
+		CH_CORE_ERROR(__VA_ARGS__);\
 		__debugbreak();\
 	}
 
 #else
-	#define ASSERT_CON(condition)
-	#define ASSERT(condition, ...)
-	#define CORE_ASSERT(condition, ...)
+	#define CH_ASSERT_CON(condition)
+	#define CH_ASSERT(condition, ...)
+	#define CH_CORE_ASSERT(condition, ...)
 #endif
 
 #endif

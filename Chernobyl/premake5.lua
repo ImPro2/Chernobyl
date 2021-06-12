@@ -9,8 +9,8 @@ project "Chernobyl"
 
     disablewarnings { warnings }
 
-    --- pchheader "chpch.h"
-    --- pchsource "Chernobyl/src/chpch.cpp"
+    pchheader "chpch.h"
+    pchsource "src/chpch.cpp"
 
     files
     {

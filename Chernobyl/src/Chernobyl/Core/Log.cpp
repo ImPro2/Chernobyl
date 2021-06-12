@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "Log.h"
 
 namespace CH

@@ -1,3 +1,4 @@
+#include "chpch.h"
 #include "Time.h"
 
 namespace CH

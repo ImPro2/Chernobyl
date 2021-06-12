@@ -1,8 +1,10 @@
 #pragma once
 
-#ifdef CH_API_ENTRY
+// Entry Point
+
 #include "Chernobyl/Core/APIEntry.h"
-#endif
+
+// Core
 
 #include "Chernobyl/Core/Application.h"
 #include "Chernobyl/Core/Events.h"
@@ -12,4 +14,13 @@
 #include "Chernobyl/Core/Log.h"
 #include "Chernobyl/Core/ExitCode.h"
 
+// Modules
+
+#include "Chernobyl/Module/Module.h"
 #include "Chernobyl/Module/ModuleStack.h"
+
+// Renderer
+
+#include "Chernobyl/Renderer/RendererAPISwitch.h"
+#include "Chernobyl/Renderer/Context.h"
+#include "Chernobyl/Renderer/RenderCommand.h"

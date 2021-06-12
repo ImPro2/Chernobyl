@@ -18,7 +18,7 @@ namespace CH
 		bool VSyncEnabled;
 		const char* Title;
 
-		WindowData(int32 width = 800, int32 height = 600, bool vsync = false, const char* title = "Graphics Engine")
+		WindowData(int32 width = 800, int32 height = 600, bool vsync = false, const char* title = "Chernobyl Engine")
 			: Width(width), Height(height), VSyncEnabled(vsync), Title(title) {}
 	};
 

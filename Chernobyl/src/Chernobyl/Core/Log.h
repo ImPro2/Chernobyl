@@ -28,14 +28,14 @@ namespace CH
 // avoid error...
 #undef ERROR
 
-#define CORE_TRACE(...)		CH::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define CORE_INFO(...)		CH::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define CORE_WARN(...)		CH::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define CORE_ERROR(...)		CH::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define CORE_CRITICAL(...)	CH::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define CH_CORE_TRACE(...)		CH::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define CH_CORE_INFO(...)		CH::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define CH_CORE_WARN(...)		CH::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define CH_CORE_ERROR(...)		CH::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define CH_CORE_CRITICAL(...)	CH::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
-#define TRACE(...)			CH::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define INFO(...)			CH::Log::GetClientLogger()->info(__VA_ARGS__)
-#define WARN(...)			CH::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define ERROR(...)			CH::Log::GetClientLogger()->error(__VA_ARGS__)
-#define CRITICAL(...)		CH::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define CH_TRACE(...)			CH::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define CH_INFO(...)			CH::Log::GetClientLogger()->info(__VA_ARGS__)
+#define CH_WARN(...)			CH::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define CH_ERROR(...)			CH::Log::GetClientLogger()->error(__VA_ARGS__)
+#define CH_CRITICAL(...)		CH::Log::GetClientLogger()->critical(__VA_ARGS__)

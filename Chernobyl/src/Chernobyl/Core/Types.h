@@ -45,7 +45,8 @@ namespace CH
 	template<typename T>
 	struct vec2
 	{
-		T x, y;
+		union { T x, r; };
+		union { T y, g; };
 
 		// constructor/destructor
 
@@ -107,7 +108,9 @@ namespace CH
 	template<typename T>
 	struct vec3
 	{
-		T x, y, z;
+		union { T x, r; };
+		union { T y, g; };
+		union { T z, b; };
 
 		// constructor/destructor
 
@@ -177,7 +180,10 @@ namespace CH
 	template<typename T>
 	struct vec4
 	{
-		T x, y, z, w;
+		union { T x, r; };
+		union { T y, g; };
+		union { T z, b; };
+		union { T w, a; };
 
 		// constructor/destructor
 
