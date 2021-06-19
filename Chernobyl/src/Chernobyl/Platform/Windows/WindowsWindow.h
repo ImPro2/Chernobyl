@@ -14,17 +14,19 @@ namespace CH
 		WindowsWindow(WindowData data);
 		~WindowsWindow();
 
-		virtual int32                 GetWidth()         const override { return m_Data.Width; }
-		virtual int32                 GetHeight()        const override { return m_Data.Height; }
-		virtual const char*           GetTitle()         const override { return m_Data.Title; }
-		virtual bool                  IsVSync()          const override { return m_Data.VSyncEnabled; }
-		virtual void*                 GetHandle()        const override { return m_Handle; }
-		virtual bool		          IsOpen()           const override { return m_Data.IsOpen; }
-		virtual WindowEventCallbackFn GetEventCallback() const override { return m_Data.EventCallback; }
+		virtual int32                 GetWidth()         const override { return m_Data.Width;            }
+		virtual int32                 GetHeight()        const override { return m_Data.Height;           }
+		virtual const char*           GetTitle()         const override { return m_Data.Title;            }
+		virtual bool                  IsVSync()          const override { return m_Data.VSyncEnabled;     }
+		virtual void*                 GetHandle()        const override { return m_Handle;                }
+		virtual bool		          IsOpen()           const override { return m_Data.IsOpen;           }
+		virtual WindowEventCallbackFn GetEventCallback() const override { return m_Data.EventCallback;    }
+		virtual Context*              GetContext()       const override { return m_Context.get();         }
 
-		void SetEventCallback(WindowEventCallbackFn fn) override { m_Data.EventCallback = fn; }
+		void SetEventCallback(WindowEventCallbackFn fn)  override { m_Data.EventCallback = fn;            }
+		void SetHandle(void* handle)                     override { m_Handle = static_cast<HWND>(handle); }
 
-		void Init() override;
+		void Init()   override;
 		void Update() override;
 
 	private:

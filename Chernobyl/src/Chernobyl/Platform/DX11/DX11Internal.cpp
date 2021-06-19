@@ -6,9 +6,6 @@ namespace CH
 
 	namespace DXInternal {
 
-		template<typename T>
-		using ComPtr = Microsoft::WRL::ComPtr<T>;
-
 		static ComPtr<ID3D11Device> pDevice;
 		static ComPtr<ID3D11DeviceContext> pContext;
 		static ComPtr<IDXGISwapChain> pSwapChain;
@@ -81,8 +78,28 @@ namespace CH
 			CH_ASSERT(SUCCEEDED(hr), "Failed to get back buffer");
 			hr = pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pRTV);
 			CH_ASSERT(SUCCEEDED(hr), "Failed to create rtv");
+
+			DXInternal::SetRenderTargets();
 		}
 
+		void Resize(const float2& size)
+		{
+			pRTV.ReleaseAndGetAddressOf();
+			
+			pSwapChain->ResizeBuffers(1, size.x, size.y, DXGI_FORMAT_B8G8R8A8_UNORM, 0);
+			
+			ComPtr<ID3D11Texture2D> pBackBuffer;
+			pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), &pBackBuffer);
+			pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pRTV);
+			
+			DXInternal::SetRenderTargets();
+		}
+
+		void SetRenderTargets()
+		{
+			pContext->OMSetRenderTargets(1, pRTV.GetAddressOf(), /*pDPS*/nullptr);
+		}
 	}
+
 
 }

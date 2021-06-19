@@ -4,11 +4,52 @@
 #include "DX11Internal.h"
 
 #include "Chernobyl/Core/Application.h"
-
+#include "Chernobyl/Renderer/Renderer.h"
+#include "Chernobyl/Renderer/Buffer.h"
+#include "Chernobyl/Renderer/Shader.h"
+#include "Chernobyl/Renderer/Pipeline.h"
+#include "DX11Shader.h"
 #include <d3dcompiler.h>
+
+#include <fstream>
 
 namespace CH
 {
+
+	namespace Utils
+	{
+		String DrawModeToStr(DrawMode mode)
+		{
+			switch (mode)
+			{
+				case DrawMode::Point:			return "Point";
+				case DrawMode::LineList:		return "LineList";
+				case DrawMode::LineStrip:		return "LineStrip";
+				case DrawMode::LineIndex:		return "LineIndex";
+				case DrawMode::TriangleList:	return "TriangleList";
+				case DrawMode::TriangleStrip:	return "TriangleStrip";
+				case DrawMode::TriangleIndex:	return "TriangleIndex";
+			}
+
+			return "None";
+		}
+
+		D3D_PRIMITIVE_TOPOLOGY DrawModeToPrimitiveTopology(DrawMode mode)
+		{
+			switch (mode)
+			{
+				case DrawMode::Point:			return D3D_PRIMITIVE_TOPOLOGY_POINTLIST;
+				case DrawMode::LineList:		return D3D_PRIMITIVE_TOPOLOGY_LINELIST;
+				case DrawMode::LineStrip:		return D3D_PRIMITIVE_TOPOLOGY_LINESTRIP;
+				case DrawMode::LineIndex:		return D3D_PRIMITIVE_TOPOLOGY_LINELIST;
+				case DrawMode::TriangleList:	return D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+				case DrawMode::TriangleStrip:	return D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+				case DrawMode::TriangleIndex:	return D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+			}
+
+			return D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
+		}
+	}
 
 	void DX11RendererAPI::SetClearColor(const float3& color)
 	{
@@ -20,114 +61,102 @@ namespace CH
 
 	void DX11RendererAPI::Clear()
 	{
+		float clearColor[4]{ m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, 0 };
+
+		DXInternal::SetRenderTargets();
+		DXInternal::GetDeviceContext()->ClearRenderTargetView(DXInternal::GetRTV(), clearColor);
+
+		/*
+
 		// TEMPORARY CODE TO DRAW TRIANGLE
 
-		ComPtr<ID3D11Buffer> pVertexBuffer;
+		// vertices + indices
 
-		float vertices[]
+		struct Vertex
 		{
-			-0.5f, -0.5f,
-			 0.5f, -0.5f,
-			 0.0f,  0.5f
+			float x;
+			float y;
+			float r;
+			float g;
+			float b;
+		};
+		
+		Vertex vertices[] =
+		{
+			{ 0.0f,0.5f,1.0f,0.0f,0.0f },
+			{ 0.5f,-0.5f,0.0f,1.0f,0.0f },
+			{ -0.5f,-0.5f,0.0f,0.0f,1.0f },
 		};
 
-		// vertex buffer creation
+		u16 indices[] = { 0, 1, 2 };
 
-		D3D11_BUFFER_DESC buffDesc = {};
-		buffDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		buffDesc.ByteWidth = sizeof(vertices);
-		buffDesc.CPUAccessFlags = 0;
-		buffDesc.MiscFlags = 0;
-		buffDesc.StructureByteStride = sizeof(float) * 2;
-		buffDesc.Usage = D3D11_USAGE_DEFAULT;
-		
-		D3D11_SUBRESOURCE_DATA sbd = {};
-		sbd.pSysMem = vertices;
+		// vertex + index buffers
 
-		DXInternal::GetDevice()->CreateBuffer(&buffDesc, &sbd, &pVertexBuffer);
+		Ref<VertexBuffer> vertexBuffer = VertexBuffer::Create(vertices, 3, sizeof(vertices), sizeof(Vertex));
+		Ref<IndexBuffer>  indexBuffer =  IndexBuffer::Create( indices,  3, sizeof(indices));
 
-		uint32 stride = sizeof(float) * 2;
-		uint32 offset = 0;
-
-		DXInternal::GetDeviceContext()->IASetVertexBuffers(0, 1, pVertexBuffer.GetAddressOf(), &stride, &offset);
+		vertexBuffer->SetLayout({
+			BufferElement("Position", ShaderDataType::Float2, false),
+			BufferElement("Color",    ShaderDataType::Float3, false)
+		});
 
 		// shaders
 
-		ComPtr<ID3D11VertexShader> pVertexShader;
-		ComPtr<ID3D11PixelShader>  pPixelShader;
-
-		ComPtr<ID3DBlob> pVSBlob;
-		ComPtr<ID3DBlob> pPSBlob;
-		ComPtr<ID3DBlob> pErrBlob;
-
-		const char* vertexSrc = R"(
-		float4 main(float2 position)
-		{
-			return float4(position, 0, 1);
-		})";
-
-		const char* fragmentSrc = R"(
-		float4 main() : SV_TARGET
-		{
-			return float4(1.0, 0, 0, 1.0);
-		})";
-
-		HRESULT hr;
-		hr = D3DCompile(vertexSrc, sizeof(vertexSrc), nullptr, nullptr, nullptr, "main", "vs_4_0", D3DCOMPILE_DEBUG, 0, &pVSBlob, &pErrBlob);
-		if (FAILED(hr))
-		{
-			const char* errMsg = (char*)pErrBlob->GetBufferPointer();
-			CH_CORE_ASSERT(false, errMsg);
-		}
-
-		hr = D3DCompile(fragmentSrc, sizeof(fragmentSrc), nullptr, nullptr, nullptr, "main", "ps_4_0", D3DCOMPILE_DEBUG, 0, &pPSBlob, &pErrBlob);
-		if (FAILED(hr))
-		{
-			const char* errMsg = (char*)pErrBlob->GetBufferPointer();
-			CH_CORE_ASSERT(false, errMsg);
-		}
-
-		DXInternal::GetDevice()->CreateVertexShader(pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), nullptr, &pVertexShader);
-		DXInternal::GetDevice()->CreatePixelShader(pPSBlob->GetBufferPointer(), pPSBlob->GetBufferSize(), nullptr, &pPixelShader);
+		Ref<Shader> shader = Shader::Create("C:/Users/User/Documents/dev/LearnRenderAPIs/Chernobyl/Chernobyl/assets/BasicShader.hlsl", Shader::Load::Path);
 		
-		DXInternal::GetDeviceContext()->VSSetShader(pVertexShader.Get(), nullptr, 0);
-		DXInternal::GetDeviceContext()->PSSetShader(pPixelShader.Get() , nullptr, 0);
+		// pipeline
 
-		ComPtr<ID3D11InputLayout> pInputLayout;
-		D3D11_INPUT_ELEMENT_DESC ieds[]
+		Ref<Pipeline> pipeline = Pipeline::Create();
+		pipeline->AddVertexBuffer(vertexBuffer, shader);
+
+		DXInternal::SetRenderTargets();
+
+		// draw
+
+		Renderer::BeginScene();
 		{
-			{ "Position", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-		};
-
-		DXInternal::GetDevice()->CreateInputLayout(ieds, 1, pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &pInputLayout);
-		DXInternal::GetDeviceContext()->IASetInputLayout(pInputLayout.Get());
+			RenderCommand::SetDrawMode(DrawMode::TriangleIndex);
+			Renderer::Submit(shader, vertexBuffer, indexBuffer);
+		}
+		Renderer::EndScene();
 
 		// END TEMPORARY CODE
 
-		int width = Application::Get()->GetWindow()->GetWidth();
-		int height = Application::Get()->GetWindow()->GetHeight();
+		*/
+	}
 
-		D3D11_VIEWPORT vp = {};
-		vp.TopLeftX = 0;
-		vp.TopLeftY = 0;
+	void DX11RendererAPI::SetViewport(const float2& size)
+	{
+		D3D11_VIEWPORT vp;
+		vp.Width = size.x;
+		vp.Height = size.y;
 		vp.MinDepth = 0;
 		vp.MaxDepth = 1;
-		vp.Width = width;
-		vp.Height = height;
-
+		vp.TopLeftX = 0;
+		vp.TopLeftY = 0;
 		DXInternal::GetDeviceContext()->RSSetViewports(1, &vp);
+	}
 
-		float clearColor[4]{ m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, 0 };
+	void DX11RendererAPI::SetMode(DrawMode mode)
+	{
+		m_DrawMode = mode;
+		DXInternal::GetDeviceContext()->IASetPrimitiveTopology(Utils::DrawModeToPrimitiveTopology(mode));
+	}
 
-		DXInternal::GetDeviceContext()->OMSetRenderTargets(1, DXInternal::GetRTVAsComptr().GetAddressOf(), nullptr);
-		DXInternal::GetDeviceContext()->ClearRenderTargetView(DXInternal::GetRTV(), clearColor);
+	void DX11RendererAPI::Draw(const std::shared_ptr<VertexBuffer>& vb, const std::shared_ptr<IndexBuffer>& ib)
+	{
+		switch (m_DrawMode)
+		{
+			case DrawMode::Point:			DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
+			case DrawMode::LineList:		DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
+			case DrawMode::LineStrip:		DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
+			case DrawMode::LineIndex:		DXInternal::GetDeviceContext()->DrawIndexed( ib->GetCount(),        0, NULL );	return;
+			case DrawMode::TriangleList:	DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
+			case DrawMode::TriangleStrip:	DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
+			case DrawMode::TriangleIndex:	DXInternal::GetDeviceContext()->DrawIndexed( ib->GetCount(),        0, NULL );	return;
+		}
 
-		// DRAWING CODE
-
-		DXInternal::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		DXInternal::GetDeviceContext()->Draw(3, 0);
-
-		// END DRAWING CODE
+		CH_CORE_WARN("DrawMode::{0} not currently supported", Utils::DrawModeToStr(m_DrawMode));
 	}
 
 }

@@ -105,6 +105,7 @@ namespace CH
 
 			data->Width = width;
 			data->Height = height;
+
 			data->EventCallback(WindowResizeEvent(width, height));
 			break;
 		}
@@ -192,7 +193,9 @@ namespace CH
 		default:
 		{
 			if (Application::Get()->GetStats().FrameCount == 1 && data->FirstEventIteration)
+			{
 				data->EventCallback(AppCreateEvent());
+			}
 		}
 		}
 		if (Application::Get()->GetStats().FrameCount > 0)

@@ -24,3 +24,6 @@
 #include "Chernobyl/Renderer/RendererAPISwitch.h"
 #include "Chernobyl/Renderer/Context.h"
 #include "Chernobyl/Renderer/RenderCommand.h"
+#include "Chernobyl/Renderer/Renderer.h"
+#include "Chernobyl/Renderer/RenderingResource.h"
+#include "Chernobyl/Renderer/Pipeline.h"

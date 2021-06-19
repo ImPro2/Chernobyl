@@ -2,6 +2,7 @@
 
 #include "Chernobyl/Core/Core.h"
 #include "Chernobyl/Core/Events.h"
+#include "Chernobyl/Renderer/Context.h"
 
 #include <memory>
 
@@ -18,7 +19,7 @@ namespace CH
 		bool VSyncEnabled;
 		const char* Title;
 
-		WindowData(int32 width = 800, int32 height = 600, bool vsync = false, const char* title = "Chernobyl Engine")
+		WindowData(int32 width = 1366, int32 height = 768, bool vsync = false, const char* title = "Chernobyl Engine")
 			: Width(width), Height(height), VSyncEnabled(vsync), Title(title) {}
 	};
 
@@ -35,8 +36,10 @@ namespace CH
 		virtual void*                 GetHandle()        const = 0;
 		virtual bool		          IsOpen()	         const = 0;
 		virtual WindowEventCallbackFn GetEventCallback() const = 0;
+		virtual Context*              GetContext()       const = 0;
 
 		virtual void SetEventCallback(WindowEventCallbackFn fn) = 0;
+		virtual void SetHandle(void* handle)                    = 0;
 
 		virtual void Init() = 0;
 		virtual void Update() = 0;

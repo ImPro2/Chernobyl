@@ -12,7 +12,7 @@ namespace CH
 
 		void Init() override;
 		void SwapBuffers(bool vsync) override;
-
+		void Resize(const float2& size) override;
 	private:
 		HWND m_WindowHandle;
 	};

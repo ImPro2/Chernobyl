@@ -14,25 +14,27 @@ namespace CH
 	template<typename T>
 	using Vector = std::vector<T>;
 
+	using Size = size_t;
+
 	// signed integers
 
-	using i8 = __int8;
+	using i8  = __int8;
 	using i16 = __int16;
 	using i32 = __int32;
 	using i64 = __int64;
 
-	using int8 = i8;
+	using int8  = i8;
 	using int32 = i32;
 	using int64 = i64;
 
 	// unsigned integers
 
-	using u8 = unsigned __int8;
+	using u8  = unsigned __int8;
 	using u16 = unsigned __int16;
 	using u32 = unsigned __int32;
 	using u64 = unsigned __int64;
 
-	using uint8 = u8;
+	using uint8  = u8;
 	using uint32 = u32;
 	using uint64 = u64;
 
@@ -270,4 +272,23 @@ namespace CH
 	using int3 = vec3<int32>;
 	using int4 = vec4<int32>;
 
+	// scopes and refs
+
+	template<class T>
+	using Scope = std::unique_ptr<T>;
+
+	template<class T, typename ... Args>
+	constexpr Scope<T> CreateScope(Args&& ... args)
+	{
+		return std::make_unique<T>(std::forward<Args>(args)...);
+	}
+
+	template<class T>
+	using Ref = std::shared_ptr<T>;
+
+	template<class T, typename ... Args>
+	constexpr Ref<T> CreateRef(Args&& ... args)
+	{
+		return std::make_shared<T>(std::forward<Args>(args)...);
+	}
 }

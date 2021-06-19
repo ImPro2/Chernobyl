@@ -17,6 +17,9 @@ namespace CH
 		void BeginFrame();
 		void EndFrame();
 
+	private:
+		void SetDarkThemeColors();
+		void SetLightThemeColors();
 
 	private:
 		bool m_BlockEvents = true;

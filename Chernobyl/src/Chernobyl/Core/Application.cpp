@@ -2,8 +2,10 @@
 #include "Application.h"
 
 #include "Chernobyl/Renderer/RenderCommand.h"
+#include "Chernobyl/Renderer/Renderer.h"
 #include "Chernobyl/Module/ModuleStack.h"
 #include "Time.h"
+#include "UUID.h"
 
 namespace CH
 {
@@ -16,8 +18,10 @@ namespace CH
 		s_Instance = this;
 
 		Log::Init();
-		m_Window = Window::Create(WindowData(1366, 768, false));
+		m_Window = Window::Create();
 		m_Window->SetEventCallback([this](Event& e) { this->OnEvent(e); });
+
+		Renderer::Init();
 
 		m_ImGuiModule = new ImGuiModule();
 		ModuleStack::PushOverlay(m_ImGuiModule);
@@ -101,6 +105,9 @@ namespace CH
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
 		m_Minimized = (e.GetWidth() <= 0 && e.GetHeight() <= 0);
+		
+		RenderCommand::SetViewport(e.GetSize());
+		
 		return true;
 	}
 

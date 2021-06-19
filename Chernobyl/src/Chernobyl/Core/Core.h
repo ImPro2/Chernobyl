@@ -48,4 +48,6 @@
 #define CH_BIND_EVENT_FN(fn) [this](auto&&... args)->decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 #define CH_DISPATCH_EVENT_FN(type, fn) dispatcher.Dispatch<type>(CH_BIND_EVENT_FN(fn))
 
+#define BIT(x) 1 << x
+
 #include "Types.h"

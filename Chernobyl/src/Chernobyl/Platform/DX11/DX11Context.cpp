@@ -1,6 +1,7 @@
 #include "chpch.h"
 #include "DX11Context.h"
 #include "DX11Internal.h"
+#include "Chernobyl/Renderer/RenderCommand.h"
 
 namespace CH
 {
@@ -19,6 +20,11 @@ namespace CH
 	void DX11Context::SwapBuffers(bool vsync)
 	{
 		DXInternal::GetSwapChain()->Present((vsync ? 1 : 0), NULL);
+	}
+
+	void DX11Context::Resize(const float2& size)
+	{
+		DXInternal::Resize(size);
 	}
 
 }

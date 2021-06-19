@@ -1,11 +1,9 @@
 #pragma once
 
+#pragma warning(push, 0)
 #include <spdlog/spdlog.h>
-#include <spdlog/async_logger.h>
-#include <spdlog/pattern_formatter.h>
-#include <spdlog/common.h>
-#include <spdlog/formatter.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/fmt/ostr.h>
+#pragma pop
 
 namespace CH
 {

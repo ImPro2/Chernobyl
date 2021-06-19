@@ -10,9 +10,14 @@
 namespace CH
 {
 
+	template<class T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
 	namespace DXInternal {
 
 		void Init(HWND handle);
+		void Resize(const float2& size);
+		void SetRenderTargets();
 
 		ID3D11Device* GetDevice();
 		ID3D11DeviceContext* GetDeviceContext();
