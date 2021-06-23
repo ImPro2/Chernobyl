@@ -13,15 +13,15 @@ namespace CH {
 	class DX11Shader : public Shader
 	{
 	public:
-		DX11Shader(const String& str, Shader::Load mode);
+		DX11Shader(const String& str, ShaderLoadMode mode);
 		void Bind() override;
 
 	public:
 		ID3DBlob* GetVertexBlob() { return m_VertexShaderBlob.Get(); }
 
 	private:
-		Shader::ParseResult Parse(const String& src, Shader::Load loadMode);
-		ID3DBlob* Compile(const String& src, const char* entrypoint, Shader::Type type);
+		ShaderParseResult Parse(const String& src, ShaderLoadMode loadMode);
+		ID3DBlob* Compile(const String& src, const char* entrypoint, ShaderType type);
 
 	private:
 		ComPtr<ID3D11VertexShader> m_VertexShader;

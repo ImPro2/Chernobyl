@@ -11,19 +11,19 @@ namespace CH {
 	struct BufferElement
 	{
 		String Name;
-		Shader::DataType Type;
+		ShaderDataType Type;
 		Size Offset;
 		uint32 Size;
 		bool Normalized;
 
 		BufferElement() = default;
 		
-		BufferElement(const String& name, Shader::DataType type, bool normalized)
+		BufferElement(const String& name, ShaderDataType type, bool normalized)
 			: Name(name), Type(type), Offset(0), Size(0), Normalized(normalized)
 		{
 		}
 
-		BufferElement(const String& name, Shader::DataType type, CH::Size offset, uint32 size, bool normalized)
+		BufferElement(const String& name, ShaderDataType type, CH::Size offset, uint32 size, bool normalized)
 			: Name(name), Type(type), Offset(offset), Size(size), Normalized(normalized)
 		{
 		}
@@ -89,7 +89,7 @@ namespace CH {
 			for (auto& element : m_Elements)
 			{
 				if (element.Size == 0)
-					element.Size = Shader::DataTypeToSize(element.Type);
+					element.Size = ShaderDataTypeToSize(element.Type);
 
 				element.Offset = offset;
 				offset        += element.Size;

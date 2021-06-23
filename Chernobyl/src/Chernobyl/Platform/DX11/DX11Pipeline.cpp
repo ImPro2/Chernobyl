@@ -7,7 +7,7 @@ namespace CH {
 
 	namespace Utils
 	{
-		DXGI_FORMAT ShaderDataTypeToDxgiFormat(Shader::DataType type)
+		DXGI_FORMAT ShaderDataTypeToDxgiFormat(ShaderDataType type)
 		{
 			switch (type)
 			{
@@ -34,7 +34,7 @@ namespace CH {
 	{
 	}
 
-	void DX11Pipeline::AddVertexBuffer(const Ref<VertexBuffer>& vb, const Ref<Shader>& shader)
+	void DX11Pipeline::SetVertexBuffer(const Ref<VertexBuffer>& vb, const Ref<Shader>& shader)
 	{
 		Vector<D3D11_INPUT_ELEMENT_DESC> ieds;
 		ID3D11InputLayout* inputLayout;
@@ -55,12 +55,20 @@ namespace CH {
 
 		DXInternal::GetDeviceContext()->IASetInputLayout(inputLayout);
 
-		m_InputLayouts.push_back(inputLayout);
-		m_VertexBufferIndex++;
+		m_InputLayout = inputLayout;
+		m_VertexBuffer = vb;
 	}
 
 	void DX11Pipeline::Bind()
 	{
+		// bind input layout
+		DXInternal::GetDeviceContext()->IASetInputLayout(m_InputLayout.Get());
+
+		// bind vertex and index buffer
+
+		m_VertexBuffer->Bind();
+		m_IndexBuffer->Bind();
+		
 		m_Binded = true;
 	}
 

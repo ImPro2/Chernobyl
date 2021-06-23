@@ -10,13 +10,13 @@ namespace CH {
 	public:
 		DX11Pipeline();
 
-		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vb, const Ref<Shader>& shader) override;
+		virtual void SetVertexBuffer(const Ref<VertexBuffer>& vb, const Ref<Shader>& shader) override;
 		virtual void SetIndexBuffer(const Ref<IndexBuffer>& ib) override { m_IndexBuffer = ib; }
 
 		void Bind() override;
 
 	private:
-		Vector<ComPtr<ID3D11InputLayout>> m_InputLayouts;
+		ComPtr<ID3D11InputLayout> m_InputLayout;
 	};
 
 }

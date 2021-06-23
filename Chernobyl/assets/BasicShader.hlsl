@@ -3,20 +3,24 @@
 struct VSInput
 {
 	float2 position : Position;
-	float3 color    : Color;
 };
 
 struct VSOutput
 {
 	float4 position : SV_POSITION;
-	float3 color    : Color;
 };
+
+cbuffer SysShaderBuffer : register(b1)
+{
+	float4x4 sys_ViewProj;
+	float4x4 sys_Model;
+}
 
 VSOutput VSMain(VSInput input)
 {
 	VSOutput output;
-	output.position = float4(input.position, 0, 1);
-	output.color = input.color;
+	float4x4 temp   = mul(sys_Model, sys_ViewProj);
+	output.position = mul(temp, float4(input.position, 0, 1));
 
 	return output;
 }
@@ -26,10 +30,14 @@ VSOutput VSMain(VSInput input)
 struct PSInput
 {
 	float4 position : SV_POSITION;
-	float3 color    : Color;
+};
+
+cbuffer ShaderBuffers
+{
+	float4 sb_Col;
 };
 
 float4 PSMain(PSInput input) : SV_TARGET
 {
-	return float4(input.color, 1);
+	return sb_Col;
 }

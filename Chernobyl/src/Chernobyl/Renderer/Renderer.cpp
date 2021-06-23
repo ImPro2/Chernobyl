@@ -3,9 +3,20 @@
 
 namespace CH {
 
+
+	Renderer::SceneData Renderer::s_SceneData;
+
+	struct ShaderData
+	{
+		glm::mat4 ViewProj;
+		glm::mat4 Transform;
+	};
+	
 	void Renderer::Init()
 	{
 		OnResize();
+
+		s_SceneData.SysShaderBuffer = ShaderBuffer::Create(sizeof(ShaderData));
 	}
 
 	void Renderer::OnResize()
@@ -15,25 +26,23 @@ namespace CH {
 		Application::Get()->GetWindow()->GetContext()->Resize(size);
 	}
 
-	void Renderer::BeginScene()
+	void Renderer::BeginScene(const glm::mat4& viewProjMat)
 	{
+		s_SceneData.ViewProjectionMatrix = viewProjMat;
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexBuffer>& vb)
+	void Renderer::Submit(const Ref<Shader>& shader, const Ref<Pipeline>& pipeline, const glm::mat4& transform)
 	{
 		shader->Bind();
-		vb->Bind();
+		pipeline->Bind();
 
-		RenderCommand::Draw(vb);
-	}
+		ShaderData data;
+		data.ViewProj = s_SceneData.ViewProjectionMatrix;
+		data.Transform = transform;
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexBuffer>& vb, const std::shared_ptr<IndexBuffer>& ib)
-	{
-		shader->Bind();
-		vb->Bind();
-		ib->Bind();
+		s_SceneData.SysShaderBuffer->SetData(&data, sizeof(ShaderData), ShaderType::Vertex, 1);
 
-		RenderCommand::Draw(vb, ib);
+		RenderCommand::Draw(pipeline->GetVertexBuffer(), pipeline->GetIndexBuffer());
 	}
 
 	void Renderer::EndScene()

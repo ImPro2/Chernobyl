@@ -3,11 +3,14 @@
 #include "RenderingResource.h"
 #include "Buffer.h"
 #include "Shader.h"
+#include "ShaderBuffer.h"
+#include "Pipeline.h"
 
 #include "RenderCommand.h"
 #include "RendererAPISwitch.h"
 
 #include "Chernobyl/Core/Application.h"
+#include "Chernobyl/Core/Core.h"
 
 namespace CH {
 
@@ -17,10 +20,17 @@ namespace CH {
 		static void Init();
 		static void OnResize();
 		
-		static void BeginScene(/*const Ref<OrthographicCamera2D>& camera*/);
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexBuffer>& vb);
-		static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexBuffer>& vb, const std::shared_ptr<IndexBuffer>& ib);
+		static void BeginScene(/*const Ref<OrthographicCamera2D>& camera*/const glm::mat4& viewProjMat);
+		static void Submit(const Ref<Shader>& shader, const Ref<Pipeline>& pipeline, const glm::mat4& transform);
 		static void EndScene();
+
+	private:
+		struct SceneData
+		{
+			glm::mat4 ViewProjectionMatrix;
+			Ref<ShaderBuffer> SysShaderBuffer;
+		};
+		static SceneData s_SceneData;
 	};
 
 }

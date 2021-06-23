@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include "Core.h"
+#include "Timer.h"
 
 namespace CH
 {
