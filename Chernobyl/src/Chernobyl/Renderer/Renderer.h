@@ -9,6 +9,8 @@
 #include "RenderCommand.h"
 #include "RendererAPISwitch.h"
 
+#include "OrthographicCamera.h"
+
 #include "Chernobyl/Core/Application.h"
 #include "Chernobyl/Core/Core.h"
 
@@ -20,7 +22,7 @@ namespace CH {
 		static void Init();
 		static void OnResize();
 		
-		static void BeginScene(/*const Ref<OrthographicCamera2D>& camera*/const glm::mat4& viewProjMat);
+		static void BeginScene(const OrthographicCamera& camera);
 		static void Submit(const Ref<Shader>& shader, const Ref<Pipeline>& pipeline, const glm::mat4& transform);
 		static void EndScene();
 

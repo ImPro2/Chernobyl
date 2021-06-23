@@ -15,7 +15,7 @@ class ModuleTest : public CH::Module
 public:
 	ModuleTest()
 		: Module("TestModule"),
-		  m_ClearColor({ 0.1f, 0.1f, 0.1f })
+		  m_ClearColor({ 0.1f, 0.1f, 0.1f }), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 	}
 
@@ -73,16 +73,17 @@ public:
 		if (CH::Input::IsKeyPressed('D'))
 			pos.x += 0.01f;
 
-		glm::mat4 proj = glm::ortho(-1.6f, 1.6f, -0.9f, 0.9f);
-		glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0));
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), pos) * glm::scale(glm::mat4(1.0f), glm::vec3(0.2));
+		m_Camera.SetPosition(CH::float2(0, 0));
+		m_Camera.SetRotation(0);
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * glm::scale(glm::mat4(1.0f), glm::vec3(0.2));
 
 		m_Shader->GetBuffer()->SetData(&m_ShaderBufferData, sizeof(m_ShaderBufferData), CH::ShaderType::Pixel);
 
-		CH::Renderer::BeginScene(view * proj);
+		CH::Renderer::BeginScene(m_Camera);
 		{
 			CH::RenderCommand::SetDrawMode(CH::DrawMode::TriangleIndex);
-			CH::Renderer::Submit(m_Shader, m_Pipeline, model);
+			CH::Renderer::Submit(m_Shader, m_Pipeline, transform);
 		}
 		CH::Renderer::EndScene();
 	}
@@ -120,6 +121,8 @@ private:
 	CH::float3 m_ClearColor;
 	CH::Timer m_Timer;
 	ShaderBuffer m_ShaderBufferData;
+
+	CH::OrthographicCamera m_Camera;
 
 	CH::Ref<CH::VertexBuffer> m_VB;
 	CH::Ref<CH::IndexBuffer> m_IB;

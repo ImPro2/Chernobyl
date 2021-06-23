@@ -26,9 +26,9 @@ namespace CH {
 		Application::Get()->GetWindow()->GetContext()->Resize(size);
 	}
 
-	void Renderer::BeginScene(const glm::mat4& viewProjMat)
+	void Renderer::BeginScene(const OrthographicCamera& camera)
 	{
-		s_SceneData.ViewProjectionMatrix = viewProjMat;
+		s_SceneData.ViewProjectionMatrix = camera.GetViewProjectionMat();
 	}
 
 	void Renderer::Submit(const Ref<Shader>& shader, const Ref<Pipeline>& pipeline, const glm::mat4& transform)
