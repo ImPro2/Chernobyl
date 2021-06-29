@@ -28,10 +28,10 @@ namespace CH {
 		virtual void Bind() = 0;
 
 	public:
-		bool IsBinded() const { return m_Binded; }
+		bool IsBinded()  const { return m_Binded; }
 		String GetUUID() const { return m_UUID;   }
-		String GetName() const { return m_Name; }
-		Type GetType() const { return m_Type; }
+		String GetName() const { return m_Name;   }
+		Type GetType()   const { return m_Type;   }
 
 	protected:
 		bool m_Binded = false;

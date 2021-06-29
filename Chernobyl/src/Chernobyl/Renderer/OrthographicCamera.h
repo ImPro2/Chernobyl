@@ -12,8 +12,8 @@ namespace CH
 	public:
 		OrthographicCamera(float left, float right, float bottom, float top);
 
-		void SetPosition(float2 pos)     { m_Position = pos;		RecalculateMatrices(); }
-		void SetRotation(float rotation) { m_Rotation = rotation;	RecalculateMatrices(); }
+		void SetPosition(float2 pos)     { m_Position = pos;					RecalculateMatrices(); }
+		void SetRotation(float rotation) { m_Rotation = glm::radians(rotation);	RecalculateMatrices(); }
 
 	private:
 		void RecalculateMatrices();

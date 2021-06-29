@@ -15,75 +15,116 @@ class ModuleTest : public CH::Module
 public:
 	ModuleTest()
 		: Module("TestModule"),
-		  m_ClearColor({ 0.1f, 0.1f, 0.1f }), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+		  m_ClearColor({ 0.1f, 0.1f, 0.1f }), m_Camera(-1.366f, 1.366f, -0.768f, 0.768f)
 	{
 	}
 
 	void OnAttach() override
 	{
-		struct Vertex
-		{
-			CH::float2 pos;
-		};
+		// shaders
 
-		Vertex vertices[]
-		{
-			{ CH::float2(-0.5f,  0.5f) },
-			{ CH::float2( 0.5f,  0.5f) },
-			{ CH::float2( 0.5f, -0.5f) },
-			{ CH::float2(-0.5f, -0.5f) }
-		}; 
-
-		CH::u16 indices[] = { 0, 1, 2,
-							  2, 3, 0 };
-
-		m_VB = CH::VertexBuffer::Create(vertices, CHCountOf(vertices), sizeof(vertices), sizeof(Vertex));
-		m_IB = CH::IndexBuffer::Create( indices,  CHCountOf(indices ), sizeof(indices));
-
-		m_VB->SetLayout({
-			CH::BufferElement("Position", CH::ShaderDataType::Float2, false)
-		});
-
-		m_Shader = CH::Shader::Create("../Chernobyl/assets/BasicShader.hlsl", CH::ShaderLoadMode::Path);
+		m_Shader = CH::Shader::Create("../Chernobyl/assets/shaders/BasicShader.hlsl", CH::ShaderLoadMode::Path);
 		m_Shader->SetBuffer(sizeof(m_ShaderBufferData));
 		m_Shader->GetBuffer()->SetData(&m_ShaderBufferData, sizeof(m_ShaderBufferData), CH::ShaderType::Pixel);
 
+		m_TexShader = CH::Shader::Create("../Chernobyl/assets/shaders/TextureShader.hlsl", CH::ShaderLoadMode::Path);
+
+		// data
+
+		struct Vertex
+		{
+			CH::float2 pos;
+			CH::float2 texcoord;
+		};
+
+		//Vertex vertices[]
+		//{
+		//	{ CH::float2(-0.5f,  0.5f), CH::float2(0, 0) },
+		//	{ CH::float2( 0.5f,  0.5f), CH::float2(1, 0) },
+		//	{ CH::float2( 0.5f, -0.5f), CH::float2(1, 1) },
+		//	{ CH::float2(-0.5f, -0.5f), CH::float2(0, 1) }
+		//}; 
+
+		float vertices[]
+		{
+			-0.5f,  0.5f,	0.0f, 0.0f,
+			 0.5f,  0.5f,	1.0f, 0.0f,
+			 0.5f, -0.5f,	1.0f, 1.0f,
+			-0.5f, -0.5f,	0.0f, 1.0f
+		};
+
+		CH::u16 indices[] = { 0, 1, 2,
+							  2, 3, 0 };
+		
+		// buffers
+
 		m_Pipeline = CH::Pipeline::Create();
-		m_Pipeline->SetVertexBuffer(m_VB, m_Shader);
-		m_Pipeline->SetIndexBuffer(m_IB);
-	}
+
+		CH::Ref<CH::VertexBuffer> vb = CH::VertexBuffer::Create(vertices, CHCountOf(vertices), sizeof(vertices), sizeof(Vertex));
+		CH::Ref<CH::IndexBuffer> ib = CH::IndexBuffer::Create( indices,  CHCountOf(indices ), sizeof(indices));
+		
+		vb->SetLayout({
+			CH::BufferElement("POSITION", CH::ShaderDataType::Float2, false),
+			CH::BufferElement("TEXCOORD", CH::ShaderDataType::Float2, false)
+		});
+		
+		m_Pipeline->SetVertexBuffer(vb, m_Shader);
+		m_Pipeline->SetIndexBuffer(ib);
+
+		// texture
+
+		m_Texture2D = CH::Texture2D::Create("../Resources/Branding/Logo.png");
+		m_Texture2D->SetSlot(0);
+}
 
 	void OnUpdate() override
 	{
+		// clear screen
+
 		CH::RenderCommand::SetClearColor(m_ClearColor);
 		CH::RenderCommand::Clear();
 
-		m_Pipeline->Bind();
+		// local variables
 
-		CH::int2 size = CH::int2(CH::Application::Get()->GetWindow()->GetWidth(), CH::Application::Get()->GetWindow()->GetHeight());
+		static CH::float2 campos;
+		static float rotation;
+		static float camrot = 0;
+		float speed = 1;
 
-		static glm::vec3 pos;
+		// input
 
 		if (CH::Input::IsKeyPressed('A'))
-			pos.x -= 0.01f;
+			campos.x -= speed * CH::Time::GetTimestep();
 		if (CH::Input::IsKeyPressed('W'))
-			pos.y += 0.01f;
+			campos.y += speed * CH::Time::GetTimestep();
 		if (CH::Input::IsKeyPressed('S'))
-			pos.y -= 0.01f;
+			campos.y -= speed * CH::Time::GetTimestep();
 		if (CH::Input::IsKeyPressed('D'))
-			pos.x += 0.01f;
+			campos.x += speed * CH::Time::GetTimestep();
 
-		m_Camera.SetPosition(CH::float2(0, 0));
-		m_Camera.SetRotation(0);
+		if (CH::Input::IsKeyPressed('E'))
+			rotation++;
 
-		glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * glm::scale(glm::mat4(1.0f), glm::vec3(0.2));
+		// update
 
+		m_Camera.SetPosition(campos);
+		m_Camera.SetRotation(camrot);
+		
 		m_Shader->GetBuffer()->SetData(&m_ShaderBufferData, sizeof(m_ShaderBufferData), CH::ShaderType::Pixel);
+		
+		// maths
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(0)) * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0, 0, 1)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.2));
+
+		// render
 
 		CH::Renderer::BeginScene(m_Camera);
 		{
 			CH::RenderCommand::SetDrawMode(CH::DrawMode::TriangleIndex);
-			CH::Renderer::Submit(m_Shader, m_Pipeline, transform);
+
+			m_Texture2D->SetSlot(0);
+			m_Texture2D->Bind();
+			CH::Renderer::Submit(m_TexShader, m_Pipeline, transform);
 		}
 		CH::Renderer::EndScene();
 	}
@@ -109,7 +150,6 @@ public:
 		
 		ImGui::End();
 
-
 		ImGui::Begin("Debug");
 		ImGui::ColorEdit3("Clear Color", &m_ClearColor.x, ImGuiColorEditFlags_PickerHueWheel/* | ImGuiColorEditFlags_Float*/);
 		ImGui::ColorEdit3("Triangle Color", &m_ShaderBufferData.col.r, ImGuiColorEditFlags_PickerHueWheel);
@@ -124,11 +164,9 @@ private:
 
 	CH::OrthographicCamera m_Camera;
 
-	CH::Ref<CH::VertexBuffer> m_VB;
-	CH::Ref<CH::IndexBuffer> m_IB;
-	CH::Ref<CH::Shader> m_Shader;
+	CH::Ref<CH::Shader> m_Shader, m_TexShader;
+	CH::Ref<CH::Texture2D> m_Texture2D;
 	CH::Ref<CH::Pipeline> m_Pipeline;
-
 };
 
 class SandboxApp : public CH::Application

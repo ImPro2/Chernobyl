@@ -21,18 +21,20 @@ project "Chernobyl"
     includedirs
     {
 	    "src",
-        "../ExternalLibs/spdlog/include",
+        "%{IncludeDir.spdlog}",
 	    "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}"
     }
 
     links
     {
         "GLFW",
         "Glad",
-        "ImGui"
+        "ImGui",
+        "HeaderOnlyDependencies"
     }
 
     filter "system:windows"

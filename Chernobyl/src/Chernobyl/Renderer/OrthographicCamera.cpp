@@ -9,7 +9,7 @@ namespace CH
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
 		: m_ProjMat(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), m_ViewMat(glm::mat4(1.0f))
 	{
-		m_ViewProjectionMat = m_ViewMat * m_ProjMat;
+		m_ViewProjectionMat = m_ProjMat * m_ViewMat;
 	}
 
 	void OrthographicCamera::RecalculateMatrices()
@@ -19,7 +19,7 @@ namespace CH
 
 		m_ViewMat = glm::inverse(transform);
 
-		m_ViewProjectionMat = m_ViewMat * m_ProjMat;
+		m_ViewProjectionMat = m_ProjMat * m_ViewMat;
 	}
 
 }

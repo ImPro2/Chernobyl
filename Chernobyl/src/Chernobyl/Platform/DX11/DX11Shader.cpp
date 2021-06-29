@@ -97,10 +97,10 @@ namespace CH {
 		switch (type)
 		{
 		case ShaderType::Vertex:
-			profile = "vs_4_0";
+			profile = "vs_5_0";
 			break;
 		case ShaderType::Pixel:
-			profile = "ps_4_0";
+			profile = "ps_5_0";
 			break;
 		default:
 			CH_CORE_ASSERT(false, "Unknown shader type");
@@ -118,6 +118,7 @@ namespace CH {
 			if (pBlob) pBlob->Release();
 			const char* msg = (const char*)pErrBlob->GetBufferPointer();
 			CH_CORE_ERROR("{0} Shader compilation failure:\n{1}", TO_STR(type), msg);
+			__debugbreak();
 		}
 
 		return pBlob;

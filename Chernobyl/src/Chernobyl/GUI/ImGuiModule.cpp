@@ -85,7 +85,9 @@ namespace CH
 	void ImGuiModule::EndFrame()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2(Application::Get()->GetWindow()->GetWidth(), Application::Get()->GetWindow()->GetHeight());
+		//io.DisplaySize = ImVec2(Application::Get()->GetWindow()->GetWidth(), Application::Get()->GetWindow()->GetHeight());
+		io.DisplaySize = ImVec2(1366, 768);
+		io.MousePos    = ImVec2(Input::GetMouseX(), Input::GetMouseY());
 
 		ImGui::Render();
 

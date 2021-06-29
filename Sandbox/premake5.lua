@@ -20,10 +20,10 @@ project "Sandbox"
     
     includedirs
     {
-        "../ExternalLibs/spdlog/include",
+        "%{IncludeDir.spdlog}",
         "../Chernobyl/src",
-        "../ExternalLibs/imgui",
-        "../ExternalLibs/Glad/include",
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.Glad}",
         "%{IncludeDir.glm}"
     }
 

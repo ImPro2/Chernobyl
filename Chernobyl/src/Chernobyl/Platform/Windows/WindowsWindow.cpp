@@ -129,10 +129,11 @@ namespace CH
 			}
 			else // not in client region
 			{
-				if (wParam & (MK_LBUTTON | MK_RBUTTON | MK_MBUTTON))
-					data->EventCallback(MouseMoveEvent(pt.x, pt.y));
-				else
-					::ReleaseCapture();
+				//if (wParam & (MK_LBUTTON | MK_RBUTTON | MK_MBUTTON))
+				//	data->EventCallback(MouseMoveEvent(pt.x, pt.y));
+				//else
+				//	::ReleaseCapture();
+				::SetCapture(hWnd);
 			}
 
 			data->LastMouseX = pt.x;

@@ -147,13 +147,13 @@ namespace CH
 	{
 		switch (m_DrawMode)
 		{
-			case DrawMode::Point:			DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
-			case DrawMode::LineList:		DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
-			case DrawMode::LineStrip:		DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
-			case DrawMode::LineIndex:		DXInternal::GetDeviceContext()->DrawIndexed( ib->GetCount(),        0, NULL );	return;
-			case DrawMode::TriangleList:	DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
-			case DrawMode::TriangleStrip:	DXInternal::GetDeviceContext()->Draw(        vb->GetVertexCount(),  0       );	return;
-			case DrawMode::TriangleIndex:	DXInternal::GetDeviceContext()->DrawIndexed( ib->GetCount(),        0, NULL );	return;
+			case DrawMode::Point:			DXInternal::GetDeviceContext()->Draw(		vb->GetVertexCount(),	0		);	return;
+			case DrawMode::LineList:		DXInternal::GetDeviceContext()->Draw(		vb->GetVertexCount(),	0		);	return;
+			case DrawMode::LineStrip:		DXInternal::GetDeviceContext()->Draw(		vb->GetVertexCount(),	0		);	return;
+			case DrawMode::LineIndex:		DXInternal::GetDeviceContext()->DrawIndexed(ib->GetCount(),			0, NULL );	return;
+			case DrawMode::TriangleList:	DXInternal::GetDeviceContext()->Draw(		vb->GetVertexCount(),	0		);	return;
+			case DrawMode::TriangleStrip:	DXInternal::GetDeviceContext()->Draw(		vb->GetVertexCount(),	0		);	return;
+			case DrawMode::TriangleIndex:	DXInternal::GetDeviceContext()->DrawIndexed(ib->GetCount(),			0, NULL );	return;
 		}
 
 		CH_CORE_WARN("DrawMode::{0} not currently supported", Utils::DrawModeToStr(m_DrawMode));

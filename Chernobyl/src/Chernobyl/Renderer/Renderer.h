@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "ShaderBuffer.h"
 #include "Pipeline.h"
+#include "Texture.h"
 
 #include "RenderCommand.h"
 #include "RendererAPISwitch.h"
