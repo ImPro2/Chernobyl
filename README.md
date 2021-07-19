@@ -58,4 +58,4 @@ Sorry, this platform is not supported yet, it might be added in the future.
 
 # Documentation
 
-The full docummentation for Chernobyl Engine is [right here](Resources/Documentation/Documentation.md).
+The full docummentation for Chernobyl Engine is [right here](/Resources/Documentation/Documentation.md).
