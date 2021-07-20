@@ -9,9 +9,6 @@
   * [Coming Soon](#coming-soon)
 * [Supported Platforms](#supported-platforms)
 * [Setup](#setup)
-  * [Windows](#windows)
-  * [MacOS](#macos)
-  * [Linux](#linux)
 * [Documentation](#documentation)
 * [Inspiration](#inspiration)
 
@@ -32,30 +29,11 @@
 
 - Windows
 
+More coming soon!
+
 # Setup
 
-Want to use the engine for yourself?
-Follow the dedicated guide to your platorm!
-
-## Windows
-
-First you need to get the source code.
-You can do this by typing the following command in command prompt:
-```git clone --recursive https://github.com/ImPro2/Chernobyl```
-
-Now navigate into the "scripts/" folder and run "WinGenProjects.bat"
-and open "Chernobyl.sln" in the root directory
-
-Right-click on the solution and click "Build Solution".
-You can now run it by click the "Run" button on top!
-
-## MacOS
-
-Sorry, this platform is not supported yet, it might be added in the future.
-
-## Linux
-
-Sorry, this platform is not supported yet, it might be added in the future.
+You can use the engine by following [this guide](/Resources/Documentation/Setup.md)!
 
 # Documentation
 
