@@ -1,6 +1,8 @@
 #include "chpch.hpp"
 #include "Application.hpp"
 
+#include "Systems/WindowSystem/WindowSystem.hpp"
+
 namespace CH
 {
 
@@ -12,11 +14,15 @@ namespace CH
 		CH_CORE_ASSERT(!sInstance, "Already Initialized Application");
 		sInstance = this;
 
-		CH_CORE_LOG(LogSeverity::Info, "Successfully Initialized Chernobyl");
+		System::Init();
+
+		mWindow = System::GetSystem(SystemType::Window)->CreateObject<IWindow>();
 	}
 
 	Application::~Application()
 	{
+		System::Shutdown();
+
 		delete sInstance;
 		sInstance = nullptr;
 
@@ -25,11 +31,16 @@ namespace CH
 
 	void Application::Run()
 	{
-		while (mRunning);
+		while (mRunning)
+		{
+			mWindow->Update();
+		}
 	}
 
 	void Application::Close()
 	{
+		mWindow->Close();
+
 		mRunning  = false;
 		mExitCode = ExitCode::CustomExit;
 	}

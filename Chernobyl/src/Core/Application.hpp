@@ -2,6 +2,7 @@
 
 #include "ExitCode.hpp"
 #include "Core.hpp"
+#include "SSO/System.hpp"
 
 namespace CH
 {
@@ -33,6 +34,7 @@ namespace CH
 	private:
 		static Application* sInstance;
 		ApplicationStartupArguments mStartupArgs;
+		Ref<IWindow> mWindow;
 		bool mRunning = true;
 		ExitCode mExitCode = ExitCode::Success;
 	};
