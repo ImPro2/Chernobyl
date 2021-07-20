@@ -5,7 +5,6 @@
 * [Structure of the Engine](#structure-of-the-engine)
   * [General Layout](#general-layout)
   * [SSO Model (System Subsystem Object Model)](#sso-model)
-  * [Implementation of SSO Model](#implementation-of-sso-model)
 * [How to use the engine](#how-to-use-the-engine)
 
 # Structure of the Engine
@@ -68,65 +67,9 @@ Though an object doesn't neccesarily have to have multiple implementations.
 So you have a Mesh class which has everything a Mesh class needs (as you can see i have no idea what it needs).
 It doesn't have to have multiple implementations like the Shader class does.
 
-That is a basic overview of the SSO Model.
+That is a basic overview of the SSO Model. I hope this covers the SSO Model pretty well XD
 
-## Basic implementation of SSO Model
-
-WARNING: THIS IS ABOUT TO GET CONFUSING
-
-If you want to know every single detail how it is implemented, read further (you must be very interested XD).
-I will have an `ISystem` class which is going to be an interface which each system will override.
-This interface will have 2 virtual methods: `Init()` and `Shutdown()`.
-It will have a vector of `ISubsystem` interfaces.
-It will have two noraml methods called `CreateObject()` and `GetSubsystem()`, both of them
-being templated. The `CreateObject()` method, well, creates and returns an object.
-The `GetSubsystem()` method returns the desired subsystem.
-Here is a code sample for using these functions:
-
-```cpp
-Ref<Shader> shader = Renderer->CreateObject<Shader>(/*params*/);
-Renderer->GetSubsystem<ShaderCompiler>()->CompileHLSLToGLSL(shader);
-```
-
-The `CreateObject()` method switches statements of a static function of that class and returns the corresponding object like this:
-```cpp
-switch (T::GetStaticType())
-{
-	case "VertexBuffer":	return new VertexBuffer(/*params*/);
-	case "Shader":			return new Shader(/*params*/);
-	...
-}
-```
-
-Every System, Subsystem and Object class must have this method: (because of the templated methods)
-```cpp
-static char* GetStaticType() { return "Shader"; /*could be anything else*/ }
-```
-So to simplify this, I will create a macro for doing this:
-```cpp
-.#define SSO_CLASS(x) static char* GetStaticType() { return #x; }
-```
-
-Now coming back to the `ISubsystem` interface (remember every system has a vector of these?).
-This class won't contain anything, all subsystems will just inherit from this class.
-
-Now moving on to where Systems are contained.
-I will have a `System` class which will be a static class (only static members and methods)
-which will contain an unordered map of `ISystem` and the name of the system (`char*`).
-This class will contain 3 methods: `Init()`, `Shutdown()` and `GetSystem()`.
-The `Init()` and `Shutdown` methods just initializes and shutdowns all of the systems.
-The `GetSystem()` method returns a system. It is simialar to the `GetSubsystem()` method
-of the `ISystem` class.
-Here is the implementation of this method:
-```cpp
-template<class T>
-ISystem* GetSystem()
-{
-	return mSystems[T::GetStaticType()];
-}
-```
-
-I hope this covers the SSO Model pretty well XD
+If you want a complete tutorial about the SSO Model, you can look a the source code for now.
 
 # How to use the Engine
 
