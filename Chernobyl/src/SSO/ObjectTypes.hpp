@@ -45,24 +45,9 @@ namespace CH
 			case ObjectType::Pipeline:		return "Pipeline";
 			case ObjectType::ShaderBuffer:	return "ShaderBuffer";
 		}
-
+		
 		return "";
 	}
-
-	//constexpr ObjectType StrToObjectType(const char* str)
-	//{
-	//	switch (type)
-	//	{
-	//		case "Window":			return ObjectType::Window;
-	//		case "VertexBuffer":	return ObjectType::VertexBuffer;
-	//		case "IndexBuffer":		return ObjectType::IndexBuffer;
-	//		case "VertexArray":		return ObjectType::VertexArray;
-	//		case "Pipeline":		return ObjectType::Pipeline;
-	//		case "ShaderBuffer":	return ObjectType::ShaderBuffer;
-	//	}
-	//
-	//	return ObjectType::Unknown;
-	//}
 
 	constexpr SystemType SystemTypeOfObjectType(ObjectType type)
 	{
