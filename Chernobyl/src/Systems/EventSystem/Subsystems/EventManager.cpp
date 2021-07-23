@@ -53,6 +53,8 @@ namespace CH
 	{
 		for (IEventListener* listener : mEventListeners)
 		{
+			listener->Event_OnEvent(*e);
+
 			switch (e->GetType())
 			{
 				case EventType::AppCreate:		listener->Event_OnAppCreate(*static_cast<AppCreateEvent*>(e));	break;

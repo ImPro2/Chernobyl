@@ -28,7 +28,8 @@ namespace CH
 				<< "Shift: " << Key.ShiftPressed << "\n"
 				<< "Alt: " << Key.AltPressed << "\n";
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -55,7 +56,8 @@ namespace CH
 				<< "Shift: " << Key.ShiftPressed << "\n"
 				<< "Alt: " << Key.AltPressed << "\n";
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -79,7 +81,8 @@ namespace CH
 			oss << "[Event]: {(Brief: Key Typed), (Type: KeyType), (Category: Keyboard)}:" << "\n"
 				<< "Character: " << Character;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 

@@ -62,7 +62,7 @@
 	do\
 	{\
 		CH_CLIENT_LOG(CH::LogSeverity::Error, "A break occured. ({0}, {1}) in {2}.\n Reason:\n", __FILE__, __LINE__, __FUNCTION__);\
-		CH_CLIENT_LOG(CH::LogSeverity::Error, __VA_ARGS);\
+		CH_CLIENT_LOG(CH::LogSeverity::Error, __VA_ARGS__);\
 		__debugbreak();\
 	}\
 	while (0);

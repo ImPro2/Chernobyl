@@ -46,11 +46,11 @@ namespace CH
 		{
 			switch (severity)
 			{
-				case LogSeverity::Trace:		Trace(	 fmt, args...);		break;
-				case LogSeverity::Info:			Info(	 fmt, args...);		break;
-				case LogSeverity::Warn:			Warn(	 fmt, args...);		break;
-				case LogSeverity::Error:		Error(	 fmt, args...);		break;
-				case LogSeverity::Critical:		Critical(fmt, args...);		break;
+				case LogSeverity::Trace:		ClientTrace(	fmt, args...);		break;
+				case LogSeverity::Info:			ClientInfo(		fmt, args...);		break;
+				case LogSeverity::Warn:			ClientWarn(		fmt, args...);		break;
+				case LogSeverity::Error:		ClientError(	fmt, args...);		break;
+				case LogSeverity::Critical:		ClientCritical(	fmt, args...);		break;
 			}
 		}
 

@@ -1,22 +1,40 @@
 #include "sandboxpch.hpp"
 
-class Sandbox;
-
 #define CH_API_ENTRY
 #include "Chernobyl.hpp"
 
+#include "Tests/Tests/EventSystemTest.hpp"
 
-class Sandbox : public CH::Application
+namespace CH::Sandbox
 {
-public:
-	Sandbox(CH::ApplicationStartupArguments args) 
-		: Application(args)
+
+	class SandboxApp : public Application
 	{
-	}
-	~Sandbox() {}
-};
+	public:
+		SandboxApp(ApplicationStartupArguments args)
+			: Application(args)
+		{
+		}
+
+		~SandboxApp() = default;
+
+	public:
+		void Init() override
+		{
+			Tests::AddTest(new Test::EventSystemTest());
+
+			Tests::SetCurrentTest("EventSystemTest");
+		}
+
+		void Update() override
+		{
+			Tests::Update();
+		}
+	};
+
+}
 
 CH::Application* CH::CreateApplication(CH::ApplicationStartupArguments args)
 {
-	return new Sandbox(args);
+	return new CH::Sandbox::SandboxApp(args);
 }

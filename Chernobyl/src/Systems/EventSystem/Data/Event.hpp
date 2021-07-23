@@ -23,6 +23,7 @@ namespace CH
 	protected:
 		EventType mType;
 		EventCategory mCategory;
+		String mToStrBuffer;	// avoid dangling strings
 	};
 
 	template<typename CodeType>

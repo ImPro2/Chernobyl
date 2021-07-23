@@ -23,6 +23,11 @@ namespace CH
 		void Event_OnWindowClose(WindowCloseEvent& e);
 		void Event_OnAppDestroy(AppDestroyEvent& e);
 
+	protected:
+		virtual void Init()   {}
+		virtual void Update() {}
+		virtual void Shutdown() {}
+
 	public:
 		// getters
 

@@ -30,7 +30,8 @@ namespace CH
 				<< "Argument Count: " << AppStartupArgs.ArgCount << "\n"
 				<< "Arguments: " << AppStartupArgs.Arguments;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -53,7 +54,8 @@ namespace CH
 			oss << "[Event]: {(Brief: App Destroyed), (Type: AppDestroy), (Category: App)}:" << "\n"
 				<< "Return Code: " << (int32)ReturnCode;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -73,7 +75,8 @@ namespace CH
 			std::ostringstream oss;
 			oss << "[Event]: {(Brief: App Updated), (Type: AppUpdate), (Category: App)}:";
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -93,7 +96,8 @@ namespace CH
 			std::ostringstream oss;
 			oss << "[Event]: {(Brief: App Rendered), (Type: AppRender), (Category: App)}:";
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 

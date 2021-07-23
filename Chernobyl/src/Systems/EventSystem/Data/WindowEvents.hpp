@@ -29,7 +29,8 @@ namespace CH
 				<< "Window Size: " << Data.Width << ", " << Data.Height << "\n"
 				<< "VSync Enabled: " << Data.VSync;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -55,7 +56,8 @@ namespace CH
 				<< "Window Size: " << Data.Width << ", " << Data.Height << "\n"
 				<< "VSync Enabled: " << Data.VSync;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -79,7 +81,8 @@ namespace CH
 			oss << "[Event]: {(Brief: Window Resized), (Type: WindowClose), (Category: Window)}:" << "\n"
 				<< "Window Size: (" << Width << ", " << Height << ")";
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -103,7 +106,8 @@ namespace CH
 			oss << "[Event]: {(Brief: Window Moved), (Type: WindowMove), (Category: Window)}:" << "\n"
 				<< "Window Position: " << XPos << ", " << YPos;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 

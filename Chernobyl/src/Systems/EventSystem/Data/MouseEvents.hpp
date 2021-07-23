@@ -30,7 +30,8 @@ namespace CH
 				<< "Shift: " << MouseButton.ShiftPressed << "\n"
 				<< "Alt: " << MouseButton.AltPressed;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -57,7 +58,8 @@ namespace CH
 				<< "Shift: " << MouseButton.ShiftPressed << "\n"
 				<< "Alt: " << MouseButton.AltPressed;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -81,7 +83,8 @@ namespace CH
 			oss << "[Event]: {(Brief: Mouse Moved), (Type: MouseMove), (Category: Mouse)}:" << "\n"
 				<< "Mouse Position: " << XPos << ", " << YPos;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 
@@ -105,7 +108,8 @@ namespace CH
 			oss << "[Event]: {(Brief: Mouse Scrolled), (Type: MouseScroll), (Category: Mouse)}:" << "\n"
 				<< "Mouse Scroll Offset: " << Offset;
 
-			return oss.str();
+			mToStrBuffer = oss.str();
+			return mToStrBuffer;
 		}
 	};
 

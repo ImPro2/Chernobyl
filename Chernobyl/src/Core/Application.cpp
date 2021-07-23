@@ -23,6 +23,8 @@ namespace CH
 		{
 			this->OnEvent(e);
 		});
+
+		CH_CORE_LOG(LogSeverity::Info, "Successfully initialized Chernobyl");
 	}
 
 	Application::~Application()
@@ -34,8 +36,12 @@ namespace CH
 
 	void Application::Run()
 	{
+		this->Init();
+
 		while (mRunning)
 		{
+			this->Update();
+
 			mWindow->Update();
 			System::GetSystem(SystemType::Event)->GetSubsystem<EventManager>()->HandleEvents();
 		}
