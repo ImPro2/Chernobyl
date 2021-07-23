@@ -23,6 +23,7 @@
 
 - Input System - Almost the same as the Event System, though simpler
 - Testing support - Tests can be performed in the Sandbox project
+- Extend Utils - Add more things like Random generators, UUID, etc.
 - Renderer System - implemented in Direct3D and OpenGL 4.0
 - Physics System - I have no idea how to implement this...
 
