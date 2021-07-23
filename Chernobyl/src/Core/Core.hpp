@@ -130,3 +130,5 @@
 #	define CH_CLIENT_BREAK_C(condition)
 #	define CH_CLIENT_BREAK_S(...)
 #endif
+
+#define CH_BIT(x) 1 << x

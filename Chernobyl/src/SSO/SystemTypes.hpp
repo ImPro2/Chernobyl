@@ -7,7 +7,7 @@ namespace CH
 	{
 		Unknown = -1,
 		Window = 0,
-		Input = 1,
+		Event = 1,
 		Renderer = 2,
 		Physics = 3,
 		Audio = 4
@@ -18,7 +18,7 @@ namespace CH
 		switch (type)
 		{
 			case SystemType::Window:	return "Window";
-			case SystemType::Input:		return "Input";
+			case SystemType::Event:		return "Event";
 			case SystemType::Renderer:	return "Renderer";
 			case SystemType::Physics:	return "Physics";
 			case SystemType::Audio:		return "Audio";

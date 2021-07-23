@@ -16,13 +16,14 @@
 
 ## Current Features
 
-- Custom Engine DataTypes
+- SSO Model - System Subsystem Object Model (more detail in docs)
+- Event System - Classes can now receive events!
 
 ## Coming Soon
 
-- SSO Model - System Subsystem Object Model (more detail in docs)
+- Input System - Almost the same as the Event System, though simpler
+- Testing support - Tests can be performed in the Sandbox project
 - Renderer System - implemented in Direct3D and OpenGL 4.0
-- Input and Event System - Classes will be able to receive events
 - Physics System - I have no idea how to implement this...
 
 # Supported Platforms

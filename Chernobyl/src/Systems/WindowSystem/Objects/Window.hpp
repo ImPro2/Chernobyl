@@ -32,16 +32,16 @@ namespace CH
 	public:
 		// getters/setters
 
-		virtual WindowHandle	GetHandle()			const	= 0;
-		virtual int32			GetWidth()			const	= 0;
-		virtual int32			GetHeight()			const	= 0;
-		virtual const String&	GetTitle()			const	= 0;
-		virtual bool			IsVSync()			const	= 0;
-		virtual WindowData		GetData()			const	= 0;
+		virtual WindowHandle	GetHandle()			const = 0;
+		virtual int32			GetWidth()			const = 0;
+		virtual int32			GetHeight()			const = 0;
+		virtual const String&	GetTitle()			const = 0;
+		virtual bool			IsVSync()			const = 0;
+		virtual WindowData		GetData()			const = 0;
 
-		virtual void SetSize(int32 width, int32 height)		= 0;
-		virtual void SetTitle(const String& title)			= 0;
-		virtual void SetVSync(bool vsync)					= 0;
+		virtual void SetSize(int32 width, int32 height) = 0;
+		virtual void SetTitle(const String& title) = 0;
+		virtual void SetVSync(bool vsync) = 0;
 	};
 
 }

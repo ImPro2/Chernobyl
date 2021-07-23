@@ -3,15 +3,10 @@
 #include "ExitCode.hpp"
 #include "Core.hpp"
 #include "SSO/System.hpp"
+#include "StartupArgs.hpp"
 
 namespace CH
 {
-
-	struct ApplicationStartupArguments
-	{
-		int32 ArgCount;
-		char** Arguments;
-	};
 
 	class Application
 	{
@@ -21,6 +16,12 @@ namespace CH
 
 		void Run();
 		void Close();
+
+	private:
+		void OnEvent(Event& e);
+		void Event_OnWindowResize(WindowResizeEvent& e);
+		void Event_OnWindowClose(WindowCloseEvent& e);
+		void Event_OnAppDestroy(AppDestroyEvent& e);
 
 	public:
 		// getters

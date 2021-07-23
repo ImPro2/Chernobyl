@@ -16,17 +16,18 @@ namespace CH
 	class ISystem
 	{
 	public:
-		virtual void Init()     = 0;
+		virtual void Init() = 0;
 		virtual void Shutdown() = 0;
 
 		template<class T>
 		Ref<T> CreateObject(void* props = nullptr);
 
-		virtual ISubsystem* GetSubsystem(SubsystemType type) = 0;
+		template<class T>
+		T* GetSubsystem();
 
 	protected:
 		// mapped as:	   type	    -     subsystem 
-		std::unordered_map<SubsystemType, ISubsystem*> mSubsystems;
+		UnorderedMap<SubsystemType, ISubsystem*> mSubsystems;
 	};
 
 }

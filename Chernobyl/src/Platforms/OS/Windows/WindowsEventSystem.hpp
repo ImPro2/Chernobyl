@@ -1,17 +1,11 @@
 #pragma once
 
-// system
-
-#include "Systems/WindowSystem/WindowSystem.hpp"
-
-// objects
-
-#include "WindowsWindow.hpp"
+#include "Systems/EventSystem/EventSystem.hpp"
 
 namespace CH
-{
+{ 
 
-	class WindowsWindowSystem : public WindowSystem
+	class WindowsEventSystem : public EventSystem
 	{
 	public:
 		void Init() override;
@@ -22,7 +16,7 @@ namespace CH
 		{
 			switch (type)
 			{
-				case ObjectType::Window:	return CreateRef<WindowsWindow>(props == nullptr ? WindowData() : *(WindowData*)props);
+				case ObjectType::EventListener:		return CreateRef<T>(props);
 			}
 
 			CH_CORE_BREAK_S("Invalid object type '{0}' referenced in {1}", ObjectTypeToStr(type), __FUNCTION__);

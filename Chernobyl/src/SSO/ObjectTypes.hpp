@@ -12,9 +12,9 @@ namespace CH
 		// Window system
 		Window,
 
-		// Input system
+		// Event system
 
-		
+		EventListener,
 
 		// Renderer system
 
@@ -39,6 +39,7 @@ namespace CH
 		switch (type)
 		{
 			case ObjectType::Window:		return "Window";
+			case ObjectType::EventListener:	return "EventListener";
 			case ObjectType::VertexBuffer:	return "VertexBuffer";
 			case ObjectType::IndexBuffer:	return "IndexBuffer";
 			case ObjectType::VertexArray:	return "VertexArray";
@@ -54,6 +55,7 @@ namespace CH
 		switch (type)
 		{
 			case ObjectType::Window:		return SystemType::Window;
+			case ObjectType::EventListener:	return SystemType::Event;
 			case ObjectType::VertexBuffer:	return SystemType::Renderer;
 			case ObjectType::IndexBuffer:	return SystemType::Renderer;
 			case ObjectType::VertexArray:	return SystemType::Renderer;

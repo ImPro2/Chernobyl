@@ -9,9 +9,9 @@ namespace CH
 
 
 
-		// Input system
+		// Event system
 
-
+		EventManager,
 
 		// Renderer system
 
