@@ -11,9 +11,7 @@ namespace CH
 
 	WindowSystem* WindowSystem::Create()
 	{
-#ifdef CH_PLATFORM_WINDOWS
-		return new WindowsWindowSystem();
-#endif
+		return new NativeClass();
 	}
 
 }

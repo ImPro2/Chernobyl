@@ -13,6 +13,10 @@ namespace CH
 
 		EventManager,
 
+		// input system
+
+		InputManager,
+
 		// Renderer system
 
 		ShaderCompiler,

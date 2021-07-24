@@ -4,6 +4,7 @@
 #include "Chernobyl.hpp"
 
 #include "Tests/Tests/EventSystemTest.hpp"
+#include "Tests/Tests/InputSystemTest.hpp"
 
 namespace CH::Sandbox
 {
@@ -22,8 +23,9 @@ namespace CH::Sandbox
 		void Init() override
 		{
 			Tests::AddTest(new Test::EventSystemTest());
+			Tests::AddTest(new Test::InputSystemTest());
 
-			Tests::SetCurrentTest("EventSystemTest");
+			Tests::SetCurrentTest("InputSystemTest");
 		}
 
 		void Update() override

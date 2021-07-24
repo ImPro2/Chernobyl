@@ -13,6 +13,9 @@ namespace CH
 
 		sSystems[SystemType::Event] = EventSystem::Create();
 		sSystems[SystemType::Event]->Init();
+
+		sSystems[SystemType::Input] = InputSystem::Create();
+		sSystems[SystemType::Input]->Init();
 	}
 
 	void System::Shutdown()
@@ -24,6 +27,10 @@ namespace CH
 		sSystems[SystemType::Event]->Shutdown();
 		delete sSystems[SystemType::Event];
 		sSystems[SystemType::Event] = nullptr;
+
+		sSystems[SystemType::Input]->Shutdown();
+		delete sSystems[SystemType::Input];
+		sSystems[SystemType::Input] = nullptr;
 	}
 
 }

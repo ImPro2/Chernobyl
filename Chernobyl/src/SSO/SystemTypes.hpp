@@ -8,9 +8,11 @@ namespace CH
 		Unknown = -1,
 		Window = 0,
 		Event = 1,
-		Renderer = 2,
-		Physics = 3,
-		Audio = 4
+		Input = 2,
+		Time = 3,
+		Renderer = 4,
+		Physics = 5,
+		Audio = 6
 	};
 
 	constexpr const char* SystemTypeToStr(SystemType type)
@@ -19,6 +21,8 @@ namespace CH
 		{
 			case SystemType::Window:	return "Window";
 			case SystemType::Event:		return "Event";
+			case SystemType::Input:		return "Input";
+			case SystemType::Time:		return "Time";
 			case SystemType::Renderer:	return "Renderer";
 			case SystemType::Physics:	return "Physics";
 			case SystemType::Audio:		return "Audio";
@@ -28,21 +32,5 @@ namespace CH
 
 		return "";
 	}
-
-	//constexpr const char* StrToSystemType(SystemType type)
-	//{
-	//	switch (type)
-	//	{
-	//		case "Window":		return SystemType::Window;
-	//		case "Input":		return SystemType::Input;
-	//		case "Renderer":	return SystemType::Renderer;
-	//		case "Physics":		return SystemType::Physics;
-	//		case "Audio":		return SystemType::Audio;
-	//	}
-	//
-	//	CH_CORE_LOG(LogSeverity::Info, "Unknown system type");
-	//
-	//	return SystemType::Unknown;
-	//}
 
 }

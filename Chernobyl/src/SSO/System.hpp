@@ -13,6 +13,8 @@
 
 #include "Systems/EventSystem/EventSystem.hpp"
 
+#include "Systems/InputSystem/InputSystem.hpp"
+
 namespace CH
 {
 
