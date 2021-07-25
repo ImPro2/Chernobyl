@@ -17,6 +17,10 @@ namespace CH
 
 		InputManager,
 
+		// time system
+
+		Time,
+
 		// Renderer system
 
 		ShaderCompiler,

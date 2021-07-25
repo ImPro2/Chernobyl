@@ -40,7 +40,14 @@ namespace CH
 
 		while (mRunning)
 		{
-			this->Update();
+
+			System::GetSystem(SystemType::Time)->GetSubsystem<Time>()->Update();
+
+			// ...
+			{
+				this->Update();
+			}
+			// ...
 
 			mWindow->Update();
 			System::GetSystem(SystemType::Event)->GetSubsystem<EventManager>()->HandleEvents();

@@ -114,20 +114,15 @@ namespace CH
 
 }
 
-#ifdef CH_DEV
+#if defined(CH_DEV) || defined(CH_TEST)
 
 #	define CH_CORE_LOG(/*CH::LogSeverity*/ severity, /*const char* fmt, ...*/ ...)\
 	CH::Log::CoreLog((CH::LogSeverity)severity, __VA_ARGS__)
 
 #	define CH_CLIENT_LOG(/*CH::LogSeverity*/ severity, /*const char* fmt, ...*/ ...)\
 	CH::Log::ClientLog((CH::LogSeverity)severity, __VA_ARGS__)
-
-#elif defined(CH_TEST)
-
-// TODO: show msg box
-
 #else
-
 // do nothing
-
+#	define CH_CORE_LOG(/*CH::LogSeverity*/ severity, /*const char* fmt, ...*/ ...)
+#	define CH_CLIENT_LOG(/*CH::LogSeverity*/ severity, /*const char* fmt, ...*/ ...)
 #endif

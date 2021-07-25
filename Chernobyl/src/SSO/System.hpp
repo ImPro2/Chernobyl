@@ -12,8 +12,8 @@
 #include "Systems/WindowSystem/Objects/Window.hpp"
 
 #include "Systems/EventSystem/EventSystem.hpp"
-
 #include "Systems/InputSystem/InputSystem.hpp"
+#include "Systems/TimeSystem/TimeSystem.hpp"
 
 namespace CH
 {

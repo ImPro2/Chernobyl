@@ -5,7 +5,7 @@
 namespace CH::Sandbox::Test
 {
 
-	class InputSystemTest : public ITest
+	class InputSystemTest : public ITest, public IEventListener
 	{
 	public:
 		InputSystemTest();
@@ -13,16 +13,6 @@ namespace CH::Sandbox::Test
 
 		void OnInit() override;
 		void OnUpdate() override;
-
-	public:
-		// events
-
-		void Event_OnMouseClick(MouseClickEvent e) override;
-		void Event_OnMouseRelease(MouseReleaseEvent e) override;
-		void Event_OnMouseMove(MouseMoveEvent e) override;
-		void Event_OnMouseScroll(MouseScrollEvent e) override;
-		void Event_OnKeyPress(KeyPressEvent e) override;
-		void Event_OnKeyRelease(KeyReleaseEvent e) override;
 	};
 
 }

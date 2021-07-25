@@ -16,6 +16,9 @@ namespace CH
 
 		sSystems[SystemType::Input] = InputSystem::Create();
 		sSystems[SystemType::Input]->Init();
+
+		sSystems[SystemType::Time] = TimeSystem::Create();
+		sSystems[SystemType::Time]->Init();
 	}
 
 	void System::Shutdown()
@@ -31,6 +34,10 @@ namespace CH
 		sSystems[SystemType::Input]->Shutdown();
 		delete sSystems[SystemType::Input];
 		sSystems[SystemType::Input] = nullptr;
+
+		sSystems[SystemType::Time]->Shutdown();
+		delete sSystems[SystemType::Time];
+		sSystems[SystemType::Time] = nullptr;
 	}
 
 }

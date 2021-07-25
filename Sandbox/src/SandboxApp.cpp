@@ -5,6 +5,7 @@
 
 #include "Tests/Tests/EventSystemTest.hpp"
 #include "Tests/Tests/InputSystemTest.hpp"
+#include "Tests/Tests/TimeSystemTest.hpp"
 
 namespace CH::Sandbox
 {
@@ -24,8 +25,9 @@ namespace CH::Sandbox
 		{
 			Tests::AddTest(new Test::EventSystemTest());
 			Tests::AddTest(new Test::InputSystemTest());
+			Tests::AddTest(new Test::TimeSystemTest());
 
-			Tests::SetCurrentTest("InputSystemTest");
+			Tests::SetCurrentTest("TimeSystemTest");
 		}
 
 		void Update() override
