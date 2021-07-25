@@ -1,43 +1,47 @@
 #include "chpch.hpp"
 #include "System.hpp"
 
+
 namespace CH
 {
+
+	static ISystem* SystemTypeToISystem(SystemType type)
+	{
+		switch (type)
+		{
+			case SystemType::Window:	return WindowSystem::Create();
+			case SystemType::Event:		return EventSystem::Create();
+			case SystemType::Input:		return InputSystem::Create();
+			case SystemType::Time:		return TimeSystem::Create();
+			case SystemType::Renderer:	CH_CORE_BREAK_S("Unsupported system!"); return nullptr;
+			case SystemType::Physics:	CH_CORE_BREAK_S("Unsupported system!"); return nullptr;
+			case SystemType::Audio:		CH_CORE_BREAK_S("Unsupported system!"); return nullptr;
+		}
+
+		CH_CORE_BREAK_S("Unsupported system!");
+		return nullptr;
+	}
 
 	System::Map System::sSystems;
 
 	void System::Init()
 	{
-		sSystems[SystemType::Window] = WindowSystem::Create();
-		sSystems[SystemType::Window]->Init();
-
-		sSystems[SystemType::Event] = EventSystem::Create();
-		sSystems[SystemType::Event]->Init();
-
-		sSystems[SystemType::Input] = InputSystem::Create();
-		sSystems[SystemType::Input]->Init();
-
-		sSystems[SystemType::Time] = TimeSystem::Create();
-		sSystems[SystemType::Time]->Init();
+		for (int i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
+		{
+			sSystems[(SystemType)i] = SystemTypeToISystem((SystemType)i);
+			sSystems[(SystemType)i]->Init();
+		}
 	}
 
 	void System::Shutdown()
 	{
-		sSystems[SystemType::Window]->Shutdown();
-		delete sSystems[SystemType::Window];
-		sSystems[SystemType::Window] = nullptr;
-
-		sSystems[SystemType::Event]->Shutdown();
-		delete sSystems[SystemType::Event];
-		sSystems[SystemType::Event] = nullptr;
-
-		sSystems[SystemType::Input]->Shutdown();
-		delete sSystems[SystemType::Input];
-		sSystems[SystemType::Input] = nullptr;
-
-		sSystems[SystemType::Time]->Shutdown();
-		delete sSystems[SystemType::Time];
-		sSystems[SystemType::Time] = nullptr;
+		for (int i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
+		{
+			SystemType type = (SystemType)i;
+			sSystems[type]->Shutdown();
+			delete sSystems[type];
+			sSystems[type] = nullptr;
+		}
 	}
 
 }

@@ -200,54 +200,52 @@ SPDLOG_INLINE bool path_exists(const filename_t &filename) SPDLOG_NOEXCEPT
 }
 
 // Return file size according to open FILE* object
-SPDLOG_INLINE size_t filesize(FILE *f)
-{
-    if (f == nullptr)
-    {
-        throw_spdlog_ex("Failed getting file size. fd is null");
-    }
-#if defined(_WIN32) && !defined(__CYGWIN__)
-    int fd = ::_fileno(f);
-#if _WIN64 // 64 bits
-    __int64 ret = ::_filelengthi64(fd);
-    if (ret >= 0)
-    {
-        return static_cast<size_t>(ret);
-    }
-
-#else // windows 32 bits
-    long ret = ::_filelength(fd);
-    if (ret >= 0)
-    {
-        return static_cast<size_t>(ret);
-    }
-#endif
-
-#else // unix
+// SPDLOG_INLINE size_t filesize(FILE *f)
+// {
+//     if (f == nullptr)
+//     {
+//         throw_spdlog_ex("Failed getting file size. fd is null");
+//     }
+// #if 0
+// #if defined(_WIN32) && !defined(__CYGWIN__)
+// #endif
+// #if _WIN64 // 64 bits
+//     __int64 ret = ::_filelengthi64(fd);
+//     if (ret >= 0)
+//     {
+//         return static_cast<size_t>(ret);
+//     }
+// #else // windows 32 bits
+//     long ret = ::_filelength(fd);
+//     if (ret >= 0)
+//     {
+//         return static_cast<size_t>(ret);
+//     }
+// #endif
+// 
+// #else // unix
 // OpenBSD doesn't compile with :: before the fileno(..)
-#if defined(__OpenBSD__)
-    int fd = fileno(f);
-#else
-    int fd = ::fileno(f);
-#endif
+// #if defined(__OpenBSD__)
+// #else
+// #endif
 // 64 bits(but not in osx or cygwin, where fstat64 is deprecated)
-#if (defined(__linux__) || defined(__sun) || defined(_AIX)) && (defined(__LP64__) || defined(_LP64))
-    struct stat64 st;
-    if (::fstat64(fd, &st) == 0)
-    {
-        return static_cast<size_t>(st.st_size);
-    }
-#else // other unix or linux 32 bits or cygwin
-    struct stat st;
-    if (::fstat(fd, &st) == 0)
-    {
-        return static_cast<size_t>(st.st_size);
-    }
-#endif
-#endif
-    throw_spdlog_ex("Failed getting file size from fd", errno);
-    return 0; // will not be reached.
-}
+// #if (defined(__linux__) || defined(__sun) || defined(_AIX)) && (defined(__LP64__) || defined(_LP64))
+//     struct stat64 st;
+//     if (::fstat64(fd, &st) == 0)
+//     {
+//         return static_cast<size_t>(st.st_size);
+//     }
+// #else // other unix or linux 32 bits or cygwin
+//     struct stat st;
+//     if (::fstat(fd, &st) == 0)
+//     {
+//         return static_cast<size_t>(st.st_size);
+//     }
+// #endif
+// #endif
+//     throw_spdlog_ex("Failed getting file size from fd", errno);
+//     return 0; // will not be reached.
+// }
 
 // Return utc offset in minutes or throw spdlog_ex on failure
 SPDLOG_INLINE int utc_minutes_offset(const std::tm &tm)

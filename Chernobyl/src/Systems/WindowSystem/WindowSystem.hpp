@@ -7,6 +7,8 @@ namespace CH { class WindowsWindowSystem; }
 #	define CH_NATIVE_CLASS_WINDOWSYSTEM WindowsWindowSystem
 #endif
 
+#include "Objects/Window.hpp"
+
 namespace CH
 {
 

@@ -15,6 +15,8 @@ namespace CH
 		Audio = 6
 	};
 
+#define CH_SYSTEM_TYPE_LAST 4
+
 	constexpr const char* SystemTypeToStr(SystemType type)
 	{
 		switch (type)

@@ -16,10 +16,11 @@ namespace CH
 
 		switch (CH::SystemTypeOfObjectType(type))
 		{
-		case SystemType::Window:	return static_cast<CH_NATIVE_CLASS_WINDOWSYSTEM*>(this)->CreateObject<T>(type, props);
+			case SystemType::Window:	return static_cast<CH_NATIVE_CLASS_WINDOWSYSTEM*>(this)->CreateObject<T>(type, props);
 		}
 
 		CH_CORE_BREAK_S("Unsupported object '{0}'.", ObjectTypeToStr(type));
+		return nullptr;
 	}
 
 	template<class T>
