@@ -1,16 +1,21 @@
 # Chernobyl Engine
 
+- `  64 files`
+- `3043 lines`
+- ` 735 semicolons`
+
 ![Chernobyl](/Resources/Branding/Logo.png?raw=true "Chernobyl")
 
 # Table of Contents
 
-* [Features](#features)
-  * [Current Features](#current-features)
-  * [Coming Soon](#coming-soon)
-* [Supported Platforms](#supported-platforms)
-* [Setup](#setup)
-* [Documentation](#documentation)
-* [Inspiration](#inspiration)
+- [Features](#features)
+  - [Current Features](#current-features)
+  - [Current Focus](#current-focus)
+  - [Coming Soon](#coming-soon)
+- [Supported Platforms](#supported-platforms)
+- [Setup](#setup)
+- [Documentation](#documentation)
+- [Inspiration](#inspiration)
 
 # Features
 
@@ -18,14 +23,22 @@
 
 - SSO Model - System Subsystem Object Model (more detail in docs)
 - Event System - Classes can now receive events!
+- Extend Utils - Add more things like Random generators, UUID, etc.
+- Testing support - Tests can be performed in the Sandbox project
+- Input System - Almost the same as the Event System, though simpler
+
+## Current Focus
+
+- Time System - Everything to do with time, like timestep, clocks, etc.
+- Code Refactoring and Improvements
 
 ## Coming Soon
 
-- Input System - Almost the same as the Event System, though simpler
-- Testing support - Tests can be performed in the Sandbox project
-- Extend Utils - Add more things like Random generators, UUID, etc.
+- Debugging, benchmarking and memory tracking - Helps to know how the engine is performing
 - Renderer System - implemented in Direct3D and OpenGL 4.0
 - Physics System - I have no idea how to implement this...
+- ECS Support
+- Editor
 
 # Supported Platforms
 

@@ -1,0 +1,2 @@
+python CountLinesAndFiles.py
+PAUSE

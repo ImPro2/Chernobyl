@@ -1,0 +1,3 @@
+Total Files: 63
+Total Lines: 3043
+Total Semicolons: 735

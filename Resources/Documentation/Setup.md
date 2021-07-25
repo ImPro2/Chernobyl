@@ -33,4 +33,4 @@ Unfortunately this platform isn't currently supported :(
 
 # Linux
 
-Unfortunately this platform isn't currently supported :()
+Unfortunately this platform isn't currently supported :(
