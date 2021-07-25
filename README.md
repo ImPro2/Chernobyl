@@ -1,8 +1,8 @@
 # Chernobyl Engine
 
-- `  64 files`
-- `3043 lines`
-- ` 735 semicolons`
+- `  72 files`
+- `3247 lines`
+- ` 773 semicolons`
 
 ![Chernobyl](/Resources/Branding/Logo.png?raw=true "Chernobyl")
 
