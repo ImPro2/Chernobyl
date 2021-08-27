@@ -12,3 +12,7 @@ bin-int/
 **.vcxproj.user
 **.sln
 .vs/
+
+# Debug files
+
+**.json

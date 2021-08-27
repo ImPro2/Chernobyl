@@ -135,7 +135,9 @@ namespace CH
 		void Subscribe(EventCallbackFn fn);				// callback that can be subscribed
 		
 		void HandleEvents();							// calls all event callbacks
-		void BroadcastEvent(Event* e);
+
+		template<class T>
+		void BroadcastEvent(T e);
 
 	private:
 		EventBus mEventBus;

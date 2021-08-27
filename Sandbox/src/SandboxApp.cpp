@@ -27,7 +27,7 @@ namespace CH::Sandbox
 			Tests::AddTest(new Test::InputSystemTest());
 			Tests::AddTest(new Test::TimeSystemTest());
 
-			Tests::SetCurrentTest("TimeSystemTest");
+			//Tests::SetCurrentTest("TimeSystemTest");
 		}
 
 		void Update() override

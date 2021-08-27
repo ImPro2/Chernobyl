@@ -10,6 +10,8 @@ namespace CH
 
 	InputManager* InputManager::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new NativeClass();
 	}
 

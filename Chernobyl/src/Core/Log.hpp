@@ -27,6 +27,7 @@ namespace CH
 	{
 	public:
 		static void Init();
+		static bool IsInitialized() { return sIsInitialized; }
 
 		template<typename ... Args>
 		static void CoreLog(LogSeverity severity, const char* fmt, const Args& ... args)
@@ -110,6 +111,7 @@ namespace CH
 	private:
 		static std::shared_ptr<spdlog::logger> sCoreLogger;
 		static std::shared_ptr<spdlog::logger> sClientLogger;
+		static bool sIsInitialized;
 	};
 
 }

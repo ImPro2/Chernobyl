@@ -2,6 +2,7 @@
 
 #include "Log.hpp"
 #include "Types/Types.hpp"
+#include "Debug/Profiler/Profiler.hpp"
 
 #ifdef CH_BUILD_STATIC
 #	define CH_API	extern

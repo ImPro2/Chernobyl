@@ -12,6 +12,8 @@ namespace CH
 	template<class T>
 	Ref<T> ISystem::CreateObject(void* props)
 	{
+		CH_PROFILE_FUNCTION();
+
 		ObjectType type = T::GetStaticType();
 
 		switch (CH::SystemTypeOfObjectType(type))
@@ -26,6 +28,8 @@ namespace CH
 	template<class T>
 	T* ISystem::GetSubsystem()
 	{
+		CH_PROFILE_FUNCTION();
+
 		SubsystemType type = T::GetStaticType();
 		ISubsystem* subsystem = mSubsystems[type];
 		return static_cast<T*>(subsystem);

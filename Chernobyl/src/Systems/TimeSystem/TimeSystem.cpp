@@ -10,6 +10,8 @@ namespace CH
 
 	TimeSystem* TimeSystem::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new NativeClass();
 	}
 

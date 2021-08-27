@@ -24,12 +24,16 @@ namespace CH
 		template<class T>
 		static ISystem* GetSystem()
 		{
+			CH_PROFILE_FUNCTION();
+
 			SystemType type = T::GetStaticType();
 			return sSystems[type];
 		}
 
 		static ISystem* GetSystem(SystemType type)
 		{
+			CH_PROFILE_FUNCTION();
+
 			return sSystems[type];
 		}
 

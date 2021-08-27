@@ -11,6 +11,8 @@ namespace CH
 	Application::Application(ApplicationStartupArguments args)
 		: mStartupArgs(args)
 	{
+		CH_PROFILE_FUNCTION();
+
 		CH_CORE_ASSERT(!sInstance, "Already Initialized Application");
 		sInstance = this;
 
@@ -29,6 +31,8 @@ namespace CH
 
 	Application::~Application()
 	{
+		CH_PROFILE_FUNCTION();
+
 		System::Shutdown();
 
 		CH_CORE_LOG(LogSeverity::Info, "Successfully Destroyed Chernobyl");
@@ -36,10 +40,14 @@ namespace CH
 
 	void Application::Run()
 	{
+		CH_PROFILE_FUNCTION();
+
 		this->Init();
+
 
 		while (mRunning)
 		{
+			CH_PROFILE_SCOPE("Run Loop");
 
 			System::GetSystem(SystemType::Time)->GetSubsystem<Time>()->Update();
 
@@ -56,6 +64,8 @@ namespace CH
 
 	void Application::Close()
 	{
+		CH_PROFILE_FUNCTION();
+
 		mRunning = false;
 	}
 
@@ -63,6 +73,8 @@ namespace CH
 
 	void Application::OnEvent(Event& e)
 	{
+		CH_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 
 		CH_DISPATCH_EVENT_FN(WindowResizeEvent, Event_OnWindowResize);
@@ -77,6 +89,8 @@ namespace CH
 
 	void Application::Event_OnWindowClose(WindowCloseEvent& e)
 	{
+		CH_PROFILE_FUNCTION();
+	
 		// check if the window that is closing is the same as the main window
 
 		if (e.Data.Title == mWindow->GetTitle() &&
@@ -86,12 +100,14 @@ namespace CH
 			// close the main window and exit the Application
 
 			AppDestroyEvent appevent = AppDestroyEvent(ExitCode::Success);
-			System::GetSystem(SystemType::Event)->GetSubsystem<EventManager>()->BroadcastEvent((Event*)&appevent);
+			System::GetSystem(SystemType::Event)->GetSubsystem<EventManager>()->BroadcastEvent<AppDestroyEvent>(appevent);
 		}
 	}
 
 	void Application::Event_OnAppDestroy(AppDestroyEvent& e)
 	{
+		CH_PROFILE_FUNCTION();
+
 		mExitCode = e.ReturnCode;
 
 		Close();

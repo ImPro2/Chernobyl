@@ -4,4 +4,4 @@
 
 namespace CH { extern Application* CreateApplication(ApplicationStartupArguments args); }
 
-int main(int argc, char* argv[]);
+CH::int32 main(CH::int32 argc, char* argv[]);

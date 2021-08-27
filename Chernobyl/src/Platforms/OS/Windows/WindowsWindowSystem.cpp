@@ -16,6 +16,8 @@ namespace CH
 
 	void WindowsWindowSystem::Init()
 	{
+		CH_PROFILE_FUNCTION();
+
 		/*
 			UINT      cbSize;
 			UINT      style;
@@ -65,6 +67,7 @@ namespace CH
 
 	void WindowsWindowSystem::Shutdown()
 	{
+		CH_PROFILE_FUNCTION();
 	}
 
 }

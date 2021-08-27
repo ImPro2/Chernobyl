@@ -10,6 +10,8 @@ namespace CH
 
 	Time* Time::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new Time();
 	}
 
@@ -17,6 +19,8 @@ namespace CH
 
 	void Time::Update()
 	{
+		CH_PROFILE_FUNCTION();
+
 		// in seconds
 		float timestep = std::chrono::duration_cast<std::chrono::nanoseconds>(
 			std::chrono::high_resolution_clock::now() - sLastFrameTime

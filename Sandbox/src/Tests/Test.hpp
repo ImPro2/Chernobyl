@@ -46,12 +46,14 @@ namespace CH::Sandbox
 	public:
 		static void Update()
 		{
-			mCurrentTest->OnUpdate();
+			if (mCurrentTest)
+				mCurrentTest->OnUpdate();
 		}
 
 		static void Destroy()
 		{
-			mCurrentTest->OnDestroy();
+			if (mCurrentTest)
+				mCurrentTest->OnDestroy();
 		}
 
 	public:

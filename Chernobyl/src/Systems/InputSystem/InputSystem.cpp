@@ -10,6 +10,8 @@ namespace CH
 
 	InputSystem* InputSystem::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new NativeClass();
 	}
 

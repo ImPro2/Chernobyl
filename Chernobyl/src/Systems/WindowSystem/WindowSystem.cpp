@@ -11,6 +11,8 @@ namespace CH
 
 	WindowSystem* WindowSystem::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new NativeClass();
 	}
 

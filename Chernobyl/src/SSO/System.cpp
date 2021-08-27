@@ -7,6 +7,8 @@ namespace CH
 
 	static ISystem* SystemTypeToISystem(SystemType type)
 	{
+		CH_PROFILE_FUNCTION();
+
 		switch (type)
 		{
 			case SystemType::Window:	return WindowSystem::Create();
@@ -26,7 +28,9 @@ namespace CH
 
 	void System::Init()
 	{
-		for (int i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
+		CH_PROFILE_FUNCTION();
+
+		for (int32 i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
 		{
 			sSystems[(SystemType)i] = SystemTypeToISystem((SystemType)i);
 			sSystems[(SystemType)i]->Init();
@@ -35,7 +39,9 @@ namespace CH
 
 	void System::Shutdown()
 	{
-		for (int i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
+		CH_PROFILE_FUNCTION();
+
+		for (int32 i = 0; i < CH_SYSTEM_TYPE_LAST; i++)
 		{
 			SystemType type = (SystemType)i;
 			sSystems[type]->Shutdown();

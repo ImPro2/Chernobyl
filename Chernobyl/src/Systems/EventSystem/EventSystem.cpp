@@ -10,6 +10,8 @@ namespace CH
 
 	EventSystem* EventSystem::Create()
 	{
+		CH_PROFILE_FUNCTION();
+
 		return new NativeClass();
 	}
 

@@ -9,6 +9,8 @@ namespace CH
 	WindowsWindow::WindowsWindow(WindowData data)
 		: mData(data)
 	{
+		CH_PROFILE_FUNCTION();
+
 		CH_CORE_LOG(LogSeverity::Info, "Creating window {1} [{2}:{3}]", mData.Title.c_str(), mData.Width, mData.Height);
 
 		mHandle = CreateWindowExA(
@@ -30,16 +32,22 @@ namespace CH
 
 	WindowsWindow::~WindowsWindow()
 	{
+		CH_PROFILE_FUNCTION();
+
 		DestroyWindow(mHandle);
 	}
 
 	void WindowsWindow::Show()
 	{
+		CH_PROFILE_FUNCTION();
+
 		ShowWindow(mHandle, SW_SHOW);
 	}
 
 	void WindowsWindow::Update()
 	{
+		CH_PROFILE_FUNCTION();
+
 		MSG msg;
 		while (PeekMessage(&msg, mHandle, 0, 0, PM_REMOVE) > 0)
 		{
@@ -50,11 +58,15 @@ namespace CH
 
 	void WindowsWindow::Close()
 	{
+		CH_PROFILE_FUNCTION();
+
 		DestroyWindow(mHandle);
 	}
 
 	void WindowsWindow::SetSize(int32 width, int32 height)
 	{
+		CH_PROFILE_FUNCTION();
+
 		mData.Width = width;
 		mData.Height = height;
 		::SetWindowPos(mHandle, HWND_TOP, CW_USEDEFAULT, CW_USEDEFAULT, width, height, SWP_NOMOVE);
@@ -62,12 +74,15 @@ namespace CH
 
 	void WindowsWindow::SetTitle(const String& title)
 	{
+		CH_PROFILE_FUNCTION();
+
 		mData.Title = title;
 		SetWindowTextA(mHandle, title.c_str());
 	}
 
 	void WindowsWindow::SetVSync(bool vsync)
 	{
+		CH_PROFILE_FUNCTION();
 		// TODO: Set VSync
 	}
 
