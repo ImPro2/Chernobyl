@@ -9,12 +9,12 @@
 # Setup
 
 Want to use the engine for yourself?
-There is a dedicated guide [here](/Tests.md)!
+There is a dedicated guide [here](/Resources/Documentation/Setup.md)!
 
 # Structure of the Engine
 
-More on it [here](/Engine-Structure.md)
+More on it [here](/Resources/Documentation//Engine-Structure.md)
 
 # How to use the Engine
 
-Currently, the only way to use the engine is to conduct [tests](/Tests.md).
+Currently, the only way to use the engine is to conduct [tests](/Resources/Documentation/Tests.md).
