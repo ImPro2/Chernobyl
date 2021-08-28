@@ -7,7 +7,7 @@
 namespace CH
 {
 
-	class Event;
+	struct Event;
 
 	// classes can inherit from this class and receive events
 

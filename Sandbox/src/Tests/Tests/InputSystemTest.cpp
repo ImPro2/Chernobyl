@@ -22,13 +22,13 @@ namespace CH::Sandbox::Test
 		InputManager* input = System::GetSystem(SystemType::Input)->GetSubsystem<InputManager>();
 
 		if (input->IsKeyDown(Key::A))
-			CH_CORE_LOG(LogSeverity::Info, "A key is pressed!");
+			CH_CLIENT_LOG(LogSeverity::Info, "A key is pressed!");
 		if (input->IsKeyDown(Key::W))
-			CH_CORE_LOG(LogSeverity::Info, "W key is pressed!");
+			CH_CLIENT_LOG(LogSeverity::Info, "W key is pressed!");
 		if (input->IsKeyDown(Key::D))
-			CH_CORE_LOG(LogSeverity::Info, "D key is pressed!");
+			CH_CLIENT_LOG(LogSeverity::Info, "D key is pressed!");
 		if (input->IsKeyDown(Key::S))
-			CH_CORE_LOG(LogSeverity::Info, "S key is pressed!");
+			CH_CLIENT_LOG(LogSeverity::Info, "S key is pressed!");
 	}
 
 }

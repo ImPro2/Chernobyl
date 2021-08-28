@@ -11,7 +11,7 @@ namespace CH
 	{
 		CH_PROFILE_FUNCTION();
 
-		CH_CORE_LOG(LogSeverity::Info, "Creating window {1} [{2}:{3}]", mData.Title.c_str(), mData.Width, mData.Height);
+		CH_CORE_LOG(LogSeverity::Info, "Creating window {} [{}:{}]", mData.Title.c_str(), mData.Width, mData.Height);
 
 		mHandle = CreateWindowExA(
 			WS_EX_OVERLAPPEDWINDOW,

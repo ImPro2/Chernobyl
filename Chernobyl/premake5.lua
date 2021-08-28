@@ -16,6 +16,7 @@ project "Chernobyl"
 
     -- Warnings
 
+
     disablewarnings { warnings }
 
     -- PCH
@@ -54,7 +55,7 @@ project "Chernobyl"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.spdlog}",
+        "%{IncludeDir.fmt}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}"
     }
@@ -65,7 +66,8 @@ project "Chernobyl"
     {
         "GLFW",
         "Glad",
-        "ImGui"
+        "ImGui",
+        "fmt"
     }
 
     defines

@@ -42,7 +42,7 @@ project "Sandbox"
 
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.spdlog}"  -- I really don't want to do this, but otherwise it throws errors
+        "%{IncludeDir.fmt}"
     }
 
     -- Links

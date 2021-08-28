@@ -2,7 +2,6 @@ workspace "Chernobyl"
     architecture "x64"
     startproject "Sandbox"
 
-
     ----------
     --------------------------------------------------------------------------------------
     --  Public Variables (or fields idk what they're called)
@@ -51,7 +50,7 @@ workspace "Chernobyl"
     IncludeDir["GLFW"]                      = "../Dependencies/GLFW/include"
     IncludeDir["Glad"]                      = "../Dependencies/Glad/include"
     IncludeDir["ImGui"]                     = "../Dependencies/imgui"
-    IncludeDir["spdlog"]                    = "../Dependencies/spdlog/include"
+    IncludeDir["fmt"]                       = "../Dependencies/fmt/include"
     IncludeDir["glm"]                       = "../Dependencies/glm"
     IncludeDir["stb_image"]                 = "../Dependencies/stb_image/include"
 
@@ -61,11 +60,13 @@ workspace "Chernobyl"
     -- Dependencies
 
     group "Dependencies"
+        include "../Dependencies/fmt"
         include "../Dependencies/GLFW"
         include "../Dependencies/Glad"
         include "../Dependencies/imgui"
     group ""
     
     -- Engine
-    include "Chernobyl/premake5.lua"
-    include "Sandbox/premake5.lua"
+    include "Chernobyl"
+    include "Sandbox"
+

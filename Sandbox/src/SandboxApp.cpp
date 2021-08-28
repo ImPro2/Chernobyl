@@ -14,7 +14,7 @@ namespace CH::Sandbox
 	{
 	public:
 		SandboxApp(ApplicationStartupArguments args)
-			: Application(args)
+			: Application(ApplicationInitData(args, "Sandbox", false))
 		{
 		}
 
@@ -27,7 +27,7 @@ namespace CH::Sandbox
 			Tests::AddTest(new Test::InputSystemTest());
 			Tests::AddTest(new Test::TimeSystemTest());
 
-			//Tests::SetCurrentTest("TimeSystemTest");
+			Tests::SetCurrentTest("InputSystemTest");
 		}
 
 		void Update() override

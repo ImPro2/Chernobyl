@@ -5,6 +5,7 @@
 #include "SSO/SSO.hpp"
 #include "Systems/EventSystem/Data/Events.hpp"
 #include "Systems/EventSystem/Objects/EventListener.hpp"
+#include "Core/Types/Types.hpp"
 
 namespace CH
 {

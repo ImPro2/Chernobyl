@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "EventTypesAndCategories.hpp"
 #include "Codes.hpp"
 

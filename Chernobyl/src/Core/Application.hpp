@@ -11,7 +11,7 @@ namespace CH
 	class Application
 	{
 	public:
-		Application(ApplicationStartupArguments args);
+		Application(ApplicationInitData initData);
 		~Application();
 
 		void Run();

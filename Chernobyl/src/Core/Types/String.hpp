@@ -16,9 +16,11 @@ namespace CH
 
 namespace CH
 {
+#include <string>
+	using String = std::string;
 
 	// TODO: Implement String Class
-	class String {};
+	//class String {};
 
 }
 

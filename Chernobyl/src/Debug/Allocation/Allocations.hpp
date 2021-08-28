@@ -19,6 +19,7 @@ namespace CH
 	private:
 		static uint32 mTotalAllocations;
 		static uint32 mTotalFreedAllocations;
+		static uint32 mLiveAllocations;
 
 	private:
 		// let these functions access class members

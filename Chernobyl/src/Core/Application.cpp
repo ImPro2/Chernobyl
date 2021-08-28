@@ -8,13 +8,15 @@ namespace CH
 
 	Application* Application::sInstance = nullptr;
 
-	Application::Application(ApplicationStartupArguments args)
-		: mStartupArgs(args)
+	Application::Application(ApplicationInitData initData)
+		: mStartupArgs(initData.StartupArgs)
 	{
 		CH_PROFILE_FUNCTION();
 
 		CH_CORE_ASSERT(!sInstance, "Already Initialized Application");
 		sInstance = this;
+
+		Log::SetClientLogProfile(initData.ClientLogProfile);
 
 		System::Init();
 
@@ -25,7 +27,7 @@ namespace CH
 		{
 			this->OnEvent(e);
 		});
-
+		
 		CH_CORE_LOG(LogSeverity::Info, "Successfully initialized Chernobyl");
 	}
 
